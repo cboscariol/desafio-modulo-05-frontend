@@ -11,7 +11,7 @@ import CadastroProvider from './Contexts/CadastroContext';
 
 import Login from "./Pages/Login";
 import Cadastro from "./Pages/Cadastro";
-// import Restaurantes from './Pages/Restaurantes';
+import Restaurantes from './Pages/Restaurantes';
 import { ProductsProvider } from './Contexts/ProductsContext';
 
 function RotasProtegidas(props) {
@@ -32,7 +32,7 @@ function Routes() {
 					</Route>
 					<RotasProtegidas >
 						<ProductsProvider>
-							{/* <Route path="/restaurantes" exact component={Restaurantes} /> */}
+							<Route path="/restaurantes" exact component={Restaurantes} />
 						</ProductsProvider>
 					</RotasProtegidas>
 				</Switch>

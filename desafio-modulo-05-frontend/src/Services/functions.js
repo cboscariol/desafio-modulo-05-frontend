@@ -1,3 +1,25 @@
+export async function getRestaurantes(token) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/restaurantes', {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
+		});
+
+		const lista = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erros: lista }
+		}
+
+		return { lista }
+	}
+	catch (error) {
+		return { errorGet: error.message };
+	}
+};
+
 export async function getProducts(token) {
 	try {
 		const resposta = await fetch('https://icubus.herokuapp.com/produtos', {
