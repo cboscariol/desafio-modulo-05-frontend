@@ -27,12 +27,12 @@ function Cadastro() {
 		}
 
 
-		fetch('https://icubus.herokuapp.com/usuarios', {
+		fetch(' https://icubus-clientes.herokuapp.com/clientes', {
 			method: "POST",
 			body: JSON.stringify({
 				"nome": data.nome,
 				"email": data.email,
-				"telefone": toString(data.telefone),
+				"telefone": data.telefone,
 				"senha": data.senha,
 			}
 			),
