@@ -30,3 +30,11 @@
 		font-size: 12px;
 	}
 
+	.header-login {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+
+
