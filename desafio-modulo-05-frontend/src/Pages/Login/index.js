@@ -58,6 +58,10 @@ export default function Login() {
 		setShowRegisterSuccess(false)
 	}
 
+	const handleCloseErrorAlert = () => {
+		setError('')
+	}
+
 
 	return (
 		<div className={classes.container}>
@@ -70,7 +74,7 @@ export default function Login() {
 						</Alert>
 					)}
 					{Boolean(error) && (
-						<Alert severity="error" variant="filled">
+						<Alert severity="error" variant="filled" onClose={handleCloseErrorAlert}>
 							{error}
 						</Alert>
 					)}
