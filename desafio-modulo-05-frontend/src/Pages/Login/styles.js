@@ -1,10 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import bglogin from '../../Assets/bg-login.png'
+// import bglogin from '../../Assets/bg-login.png'
 
 
 const useStyles = makeStyles({
 	container: {
-		backgroundImage: `url(${bglogin})`,
+		// backgroundImage: `url(${bglogin})`,
 		backgroundSize: "cover",
 		backgroundPosition: "center",
 		height: "100vh",
