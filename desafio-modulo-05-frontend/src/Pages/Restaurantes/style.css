@@ -56,7 +56,8 @@
     gap: 2rem;
     width: 60rem;
     height: auto;
-    margin-top: 2rem;
+    margin-top: 15rem;
+    position: absolute;
 }
 
 .actBtn {
