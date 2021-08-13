@@ -112,10 +112,9 @@ function Cadastro() {
 						<Typography >Senha</Typography>
 						<InputSenha
 							className={classes.formsdeCadastro}
-							register={() => register('senha', { required: true })}
 							id="inputSenhaCadastro"
-							error={errors.senha && errors.senha.message}
-							helperText={errors.senha ? "Campo Obrigatório" : false} />
+							error={errors.senha ? "Campo Obrigatório" : false}
+							register={() => register('senha', { required: true })} />
 
 						<Typography >Repita sua senha</Typography>
 						<InputSenha
