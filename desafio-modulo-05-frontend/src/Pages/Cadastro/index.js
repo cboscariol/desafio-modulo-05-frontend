@@ -7,6 +7,7 @@ import {
 	Typography,
 } from '@material-ui/core';
 import InputSenha from '../../Components/InputSenha/inputSenha'
+import Alert from '@material-ui/lab/Alert';
 import { useForm } from "react-hook-form";
 import cadastroPic from '../../Assets/cadastroPic.png'
 import logo from '../../Assets/Logo.png'
@@ -53,6 +54,12 @@ function Cadastro() {
 	}
 
 
+	const handleCloseErrorAlert = () => {
+		setError('')
+	}
+
+
+
 	return (
 		<div className='container'>
 			<div className="cadastroPic">
@@ -61,6 +68,11 @@ function Cadastro() {
 			</div>
 			<div className='cardCadastro'>
 				<h1>Cadastro</h1>
+				{Boolean(error) && (
+					<Alert className={classes.alertCadastro} severity="error" variant="filled" onClose={handleCloseErrorAlert}>
+						{error}
+					</Alert>
+				)}
 				<div className='formsCadastro'>
 					<form onSubmit={handleSubmit(salvarCadastro)} id="cadastro-form">
 						<Typography >Nome de usuário</Typography>
@@ -91,6 +103,7 @@ function Cadastro() {
 							id="input-telefone"
 							type='text'
 							variant="outlined"
+							placeholder='(xx) xxxx - xxxxx'
 							autoComplete="off"
 							error={Boolean(errors.telefone)}
 							helperText={errors.telefone ? "Campo Obrigatório" : false}

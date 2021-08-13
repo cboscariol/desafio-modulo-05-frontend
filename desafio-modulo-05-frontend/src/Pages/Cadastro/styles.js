@@ -12,6 +12,10 @@ export const useStyles = makeStyles({
 		borderRadius: 20,
 		width: 140,
 	},
+	alertCadastro: {
+		borderRadius: 15,
+		padding: 8,
+	}
 
 
 })
