@@ -5,7 +5,7 @@
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	z-index: 1000;
 }
 
@@ -94,7 +94,7 @@
 
 .div-contador {
 	width: 20rem;
-	margin-top: 2rem;
+	margin-top: 2.3rem;
 	margin-bottom: 1rem;
 	justify-content: space-between;
 }
