@@ -8,14 +8,15 @@ import {
 } from '@material-ui/core';
 import InputSenha from '../../Components/InputSenha/inputSenha'
 import Alert from '@material-ui/lab/Alert';
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import InputMask from "react-input-mask";
 import cadastroPic from '../../Assets/cadastroPic.png'
 import logo from '../../Assets/Logo.png'
 import { useHistory } from 'react-router-dom';
 
 function Cadastro() {
 	const classes = useStyles();
-	const { register, handleSubmit, watch, formState: { errors } } = useForm();
+	const { register, handleSubmit, watch, control, formState: { errors } } = useForm();
 	const [error, setError] = useState(false)
 	const history = useHistory()
 
@@ -98,23 +99,41 @@ function Cadastro() {
 							{...register('email', { required: true })} />
 
 						<Typography >Telefone</Typography>
-						<TextField
-							className={classes.formsdeCadastro}
-							id="input-telefone"
-							type='text'
-							variant="outlined"
-							placeholder='(xx) xxxx - xxxxx'
-							autoComplete="off"
-							error={Boolean(errors.telefone)}
-							helperText={errors.telefone ? "Campo Obrigatório" : false}
-							{...register('telefone', { required: true })} />
+						<Controller
+							control={control}
+							name="telefone"
+							render={({ field }) => (
+								<InputMask
+									mask="(99) 9 9999-9999"
+									{...register('telefone', { required: true })}
+									maskChar={null}
+									{...field}
+								>
+									{(maskProps) => (
+										<TextField
+											className={classes.formsdeCadastro}
+											id="input-telefone"
+											type='text'
+											variant="outlined"
+											placeholder='(xx) xxxx - xxxxx'
+											autoComplete="off"
+											error={Boolean(errors.telefone)}
+											helperText={errors.telefone ? "Campo Obrigatório" : false}
+											{...maskProps} />
+									)}
+								</InputMask>
+
+							)}
+						/>
+
 
 						<Typography >Senha</Typography>
 						<InputSenha
 							className={classes.formsdeCadastro}
+							register={() => register('senha', { required: true })}
 							id="inputSenhaCadastro"
 							error={errors.senha ? "Campo Obrigatório" : false}
-							register={() => register('senha', { required: true })} />
+						/>
 
 						<Typography >Repita sua senha</Typography>
 						<InputSenha

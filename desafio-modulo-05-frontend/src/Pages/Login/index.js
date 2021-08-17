@@ -98,8 +98,7 @@ export default function Login() {
 						<div className={classes.formsLogin}>
 							<h2 className='placeholderLogin font-montserrat'>Senha</h2>
 							<InputSenha
-								error={Boolean(errors.senha)}
-								helperText={errors.senha ? "Campo Obrigatório" : false}
+								error={errors.senha ? "Campo Obrigatório" : false}
 								register={() => register('senha', { required: true })}
 								id="inputSenhaLogin" />
 						</div>
