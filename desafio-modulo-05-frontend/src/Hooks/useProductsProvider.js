@@ -5,7 +5,7 @@ export default function useProductsProvider() {
 	const [atualizaProduto, setAtualizaProduto] = useState(false);
   const [ atualizaCardapio, setAtualizaCardapio ] = useState(false);
 	const [restaurantes, setRestaurantes] = useState([])
-	const [confirmCart, setConfirmCart] = useState();
+	const [confirmCart, setConfirmCart] = useState([]);
 
 	return {
 		produtos,
