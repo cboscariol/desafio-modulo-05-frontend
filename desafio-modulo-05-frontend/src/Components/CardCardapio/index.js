@@ -16,29 +16,27 @@ import {
 
 
 
-export default function CardRestaurante({ id_restaurante, nome, descricao, img }) {
+export default function CardCardapio({ id_restaurante, nome, descricao, img, preco }) {
   const classes = useStyles();
   const history = useHistory();
-  const { token } = useContext(AuthContext);
   const [ carregando, setCarregando ] = useState(false);
   const [ erro, setErro ] = useState('');
+  const precoFormatado = (preco/100).toFixed(2); 
+  
   const handlecloseAlert = () => {
       setErro('');
   }
-  console.log(id_restaurante, "antes")
-  function handleClick(){
-		history.push(`/cardapio/${id_restaurante}`)
-    console.log(id_restaurante, "card restaurante")
-	}
+
+ 
 
   return (
-    <Card id='card' className={classes.root} onClick={() => handleClick()}>
+    <Card id='card' className={classes.root} >
       <CardContent className={classes.cardContent} >
         <div className={classes.divContent}>
             <h2 className={classes.h2}>{nome}</h2>
             <span className={classes.spanDesc}>{descricao}</span>
             <div className={classes.priceDiv}>
-                {'$$'}
+                {`R$${precoFormatado}`}
             </div>
         </div>
         
