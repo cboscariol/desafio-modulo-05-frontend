@@ -2,6 +2,7 @@ import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../../Components/Header';
+import ModalCarrinho from '../../Components/ModalCarrinho';
 import CardCardapio from '../../Components/CardCardapio';
 import { AuthContext } from '../../Contexts/AuthContext';
 import LinhaLaranja from '../../Assets/Vector.svg';
@@ -16,6 +17,7 @@ function Cardapio() {
 	const { token } = useContext(AuthContext);
     const restaurante_id  = useParams();
 	const [ erro, setErro ] = useState('');
+	const [ openCarrinho, setOpenCarrinho ] = useState(false);
 	const [ cardapio, setCardapio ] = useState([]);
 	const [ restaurante, setRestaurante ] = useState([]);
 	const [ restauranteId, setRestauranteId ] = useState(restaurante_id.id)
@@ -56,8 +58,17 @@ function Cardapio() {
 		listarRestaurante();
 	}, []);
 
+	function handleClick(){
+		setOpenCarrinho(true);
+	}
+
 	return (
 		<div className='flex-column items-center container-products'>
+			{openCarrinho === true ?
+				<ModalCarrinho setOpenCarrinho={setOpenCarrinho}/>
+				:
+				""
+			}	
 			<Header idRestaurante={Number(restauranteId)} />
 			<img className='linhaLaranja' src={LinhaLaranja} alt=""/>
 
@@ -91,7 +102,7 @@ function Cardapio() {
 					
 	
 					{cardapio.length > 0 ?
-						<div className='grid'>
+						<div className='grid' onClick={() => handleClick()}>
 								{cardapio.map((r) => {
 									return (
 										<CardCardapio
@@ -104,10 +115,10 @@ function Cardapio() {
 										/>
 									)
 									})	
-								}		
+								}
+	
 						</div>	
 	
-						
 					:
 							
 						<div className='flex-column content-center items-center font-montserrat semProdutos'>
