@@ -25,10 +25,10 @@ export default function CardRestaurante({ id_restaurante, nome, descricao, img }
   const handlecloseAlert = () => {
       setErro('');
   }
-  console.log(id_restaurante, "antes")
+
   function handleClick(){
 		history.push(`/cardapio/${id_restaurante}`)
-    console.log(id_restaurante, "card restaurante")
+    
 	}
 
   return (

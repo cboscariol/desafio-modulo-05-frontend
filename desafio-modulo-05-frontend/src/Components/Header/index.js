@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router-dom';
 import { useState, useContext, useEffect } from 'react'
 import './style.css';
-// import NewEditProfile from '../NewEditProfile'
 import UserImage from '../../Assets/user.jpg';
 import backgroundUser from '../../Assets/Rectangle 129.png';
 import { AuthContext } from '../../Contexts/AuthContext';
@@ -40,7 +39,7 @@ function Header({ idRestaurante }) {
 			}
 			
 			setRestaurante(lista)
-			console.log(restaurante, "header")
+			
 			setImagemPerfil(lista.imagem)
 	};
 	
@@ -57,6 +56,7 @@ function Header({ idRestaurante }) {
 				if (res.status < 300) {
 					const categoria = data.find((item) => item.id === restaurante.categoria_id)
 					setImagemCategoria(categoria.imagem)
+					
 				}
 			})
 		} 
@@ -65,18 +65,11 @@ function Header({ idRestaurante }) {
 	
 	useEffect(() => {	
 		getImagemCategoria()
-	}, [])
+	}, [restaurante])
 	
 
 	const background = imagemCategoria ? imagemCategoria : backgroundUser;
-	//------------------------------------------------------------------------------//
-
-	// useEffect(() => {
-	// 	!idCategoria && getDetailsProfile()
-	// 	idCategoria && getImagemCategoria()
-	// }, [idCategoria])
-
-	//------------------------------------------//-------------------------------------------------//
+	
 
 	return (
 		<div className='flex-row items-flex-end headerProducts' style={{backgroundImage: `url(${background})`}}>

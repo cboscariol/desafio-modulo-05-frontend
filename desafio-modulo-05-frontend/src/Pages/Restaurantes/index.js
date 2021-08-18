@@ -52,9 +52,7 @@ function Restaurantes() {
 		filtrarRestaurante()
 	}, [filtro])
 
-	console.log(restaurantes[0])
-	console.log(restaurantes[1]);
-	
+
 	return (
 		<div className='flex-column items-center container-products'>
 			<Header  />
