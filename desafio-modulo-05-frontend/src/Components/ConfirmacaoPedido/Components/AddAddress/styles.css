@@ -1,0 +1,17 @@
+.content-modal-sucess{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.content-modal-sucess img{
+	width: 115px;
+	height: 115px;
+}
+
+.actionButtons{
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
+}

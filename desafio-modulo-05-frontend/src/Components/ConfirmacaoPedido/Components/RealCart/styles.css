@@ -1,0 +1,43 @@
+.headerModal{
+	display: flex;
+	justify-content: flex-start;
+	height: 50px;
+	margin-top: 35px;
+	align-items: center;
+	gap: 15px;
+}
+
+.contentModal{
+	color: #525459;
+}
+
+.contentModal a{
+	color: #525459;
+	margin-left: 120px;
+}
+
+.finalCart {
+	display: flex;
+	flex-direction: column;
+}
+
+.finalCart spam {
+	font-weight: 600;
+}
+
+.finalCartStyle {
+	display: flex;
+	justify-content: space-between;
+}
+
+.actionButtons{
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
+}
+
+.content-modal-no-itens img {
+	height: 173px;
+	width: auto;
+	transform: translate(20px);
+}
