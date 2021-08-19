@@ -46,7 +46,7 @@ function AddAddress({ setShowPage }) {
 				<h1>Adicionar Endereço</h1>
 			</div>
 
-			<div style={{ display: showSuccess ? 'none' : 'block' }} className='contentModal'>
+			<div style={{ display: showSuccess ? 'none' : 'block' }} className='contentModal align-modal-address'>
 
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<h3 >CEP</h3>

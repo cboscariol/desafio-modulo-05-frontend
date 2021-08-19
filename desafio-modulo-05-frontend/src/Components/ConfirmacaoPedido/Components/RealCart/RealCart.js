@@ -15,6 +15,7 @@ function RealCart({ setShowPage }) {
 	const [addressDetails, setAddressDetails] = useState()
 	const [erroSubmit, setErroSubmit] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
+	const [noItensOnCart, setNoItensOnCart] = useState(false)
 	const history = useHistory()
 
 	const addAddress = () => {
@@ -57,14 +58,16 @@ function RealCart({ setShowPage }) {
 
 	return (
 		<div>
-			<div className='headerModal'>
+			<header className='headerModal'>
 				<img src={cartIcon} alt="icone-carrinho-de-compras-amarelo" />
 				<h1>Nome restaurante</h1>
-			</div>
+			</header>
 
 
 
-			<div className='contentModal'>
+			<div className='contentModal'
+				style={{ display: showSuccess ? 'none' : 'block' }}
+			>
 				{showAddress ?
 					<p className='font-color-orange font-bold'>Endereço de Entrega: <span className='font-color-gray font-weight-normal '>
 						{`${addressDetails.endereco} , ${addressDetails.complemento} , ${addressDetails.cep}`}	</span> </p>
@@ -73,10 +76,6 @@ function RealCart({ setShowPage }) {
 
 				}
 				<p className='font-bold font-size-2'>Tempo de Entrega: <span className='font-size-1 '>45min</span></p>
-
-				<CardCart />
-
-				<CardCart />
 
 				<CardCart />
 
@@ -91,37 +90,38 @@ function RealCart({ setShowPage }) {
 					<p className='finalCartStyle'>Taxa de entrega <spam>`R$ ${'valor'}`</spam> </p>
 					<p className='finalCartStyle'>Total <spam className='font-size-1'>`R$ ${'valor'}`</spam> </p>
 				</div>
+				<div className='flex-row actionButtons '>
+					<button
+						className='btn-orange-small font-montserrat font-color-white'
+						type='submit'
+						onClick={onSubmit}
+					>
+						Confirmar Pedido
+					</button>
+				</div>
+
 			</div>
 
-
-
-			<div className='flex-row actionButtons '>
-				<button
-					className='btn-orange-small font-montserrat font-color-white'
-					type='submit'
-					onClick={onSubmit}
-				>
-					Confirmar Pedido
-				</button>
-			</div>
 
 			{/* --------------------------------------PEDIDO REALIZADO COM SUCESSO -------------------------------- */}
-			<div className='content-modal-sucess'>
+
+			<div className='content-modal-sucess' style={{ display: showSuccess ? 'block' : 'none' }}>
 				<img src={successIcon} alt="endereço-adiconado-com-sucesso" />
 				<p className='font-color-gray font-size-4 font-weight-600 text-align-center'>
 					Pedido Confirmado! <br></br>
 					Agora é só aguardar o seu pedido
 				</p>
-			</div>
 
-			<div className='flex-row actionButtons '>
-				<button
-					className='btn-orange-small font-montserrat font-color-white'
-					type='submit'
-					onClick={redirect}
-				>
-					Voltar para o cardápio
-				</button>
+
+				<div className='flex-row actionButtons '>
+					<button
+						className='btn-orange-small font-montserrat font-color-white'
+						type='submit'
+						onClick={redirect}
+					>
+						Voltar para o cardápio
+					</button>
+				</div>
 			</div>
 
 			{/* --------------------------------------SEM ITENS NO CARRINHO -------------------------------- */}
