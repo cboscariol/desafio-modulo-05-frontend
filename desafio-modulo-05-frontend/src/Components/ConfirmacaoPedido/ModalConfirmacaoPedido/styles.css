@@ -1,6 +1,7 @@
 .wrapperModal{
 	padding: 50px 0;
 	background-color: rgba(32, 32, 32, 0.60);
+	min-height: 100vh;
 	position: absolute;
 	top: 0;
 	left: 0;

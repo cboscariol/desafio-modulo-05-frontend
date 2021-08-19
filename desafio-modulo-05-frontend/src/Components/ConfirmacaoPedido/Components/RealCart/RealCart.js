@@ -1,13 +1,60 @@
-import React from 'react'
 import cartIcon from '../../Assets/yellow-cart.svg'
 import lineModal from '../../Assets/line-modal.svg'
 import './styles.css';
 import CardCart from '../CardCart'
 import { useState, useEffect, useContext } from 'react';
+import { useHistory } from "react-router-dom";
 import successIcon from '../../Assets/success-green-icon.svg'
 import semItensCarrinho from '../../Assets/sem-itens-carrinho.svg'
+import { AuthContext } from '../../../../Contexts/AuthContext'
+import { finalizarPedido, getEndereco } from '../../../../Services/functions'
 
-function RealCart() {
+function RealCart({ setShowPage }) {
+	const { token } = useContext(AuthContext);
+	const [showAddress, setShowAddress] = useState(false)
+	const [addressDetails, setAddressDetails] = useState()
+	const [erroSubmit, setErroSubmit] = useState(false)
+	const [showSuccess, setShowSuccess] = useState(false)
+	const history = useHistory()
+
+	const addAddress = () => {
+		setShowPage("address")
+	}
+
+	const redirect = () => {
+		history.push('/cardapio')
+	}
+
+	const getEndereço = async () => {
+		const result = await getEndereco(token)
+		if (!result.error) {
+			setAddressDetails(result)
+			setShowAddress(true)
+		}
+	}
+
+	useEffect(() => {
+		getEndereço()
+	}, [])
+
+	const onSubmit = async () => {
+		const cart = {
+			produtos: [''],
+			subttotal: '',
+			taxaEntrega: '',
+			total: '',
+		}
+
+		const result = await finalizarPedido(cart, token);
+
+		if (result.error) {
+			setErroSubmit(result.error)
+		} else {
+			setShowSuccess(true)
+		}
+	}
+
+
 	return (
 		<div>
 			<div className='headerModal'>
@@ -15,10 +62,16 @@ function RealCart() {
 				<h1>Nome restaurante</h1>
 			</div>
 
+
+
 			<div className='contentModal'>
-				<p className='font-color-orange font-bold'>Endereço de Entrega: <span className='font-color-gray font-weight-normal '>
-					Av. Tancredo Neves, 2227, ed. Salvador Prime,
-					sala 901:906; 917:920 - Caminho das Árvores, Salvador - BA, 41820-021</span> </p>
+				{showAddress ?
+					<p className='font-color-orange font-bold'>Endereço de Entrega: <span className='font-color-gray font-weight-normal '>
+						{`${addressDetails.endereco} , ${addressDetails.complemento} , ${addressDetails.cep}`}	</span> </p>
+					:
+					<button className='addAddress' onClick={addAddress}>Adicionar endereço</button>
+
+				}
 				<p className='font-bold font-size-2'>Tempo de Entrega: <span className='font-size-1 '>45min</span></p>
 
 				<CardCart />
@@ -46,7 +99,7 @@ function RealCart() {
 				<button
 					className='btn-orange-small font-montserrat font-color-white'
 					type='submit'
-					onClick={''}
+					onClick={onSubmit}
 				>
 					Confirmar Pedido
 				</button>
@@ -65,9 +118,9 @@ function RealCart() {
 				<button
 					className='btn-orange-small font-montserrat font-color-white'
 					type='submit'
-					onClick={''}
+					onClick={redirect}
 				>
-					Voltar para o carrinho
+					Voltar para o cardápio
 				</button>
 			</div>
 

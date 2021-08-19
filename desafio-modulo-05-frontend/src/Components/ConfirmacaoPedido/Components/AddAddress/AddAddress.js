@@ -1,8 +1,6 @@
 import React from 'react'
 import {
 	TextField,
-	MenuItem,
-	CircularProgress,
 } from '@material-ui/core';
 import { useStyles } from './styles';
 import { useForm, Controller } from "react-hook-form";
@@ -12,10 +10,34 @@ import { AuthContext } from '../../../../Contexts/AuthContext';
 import successIcon from '../../Assets/success-green-icon.svg'
 import cartIcon from '../../Assets/yellow-cart.svg'
 import './styles.css';
+import { adicionaEndereco } from '../../../../Services/functions'
 
-function AddAddress() {
+function AddAddress({ setShowPage }) {
 	const classes = useStyles();
-	const { register, handleSubmit, watch, control, formState: { errors } } = useForm();
+	const [erroSubmit, setErroSubmit] = useState()
+	const { token } = useContext(AuthContext);
+	const [showSuccess, setShowSuccess] = useState(false)
+	const { register, getValues, handleSubmit, control, formState: { errors } } = useForm();
+
+	const onSubmit = async () => {
+		const values = getValues()
+		console.log(values)
+		const data =
+		{
+			cep: values.cep,
+			complemento: values.complemento,
+			endereco: values.endereco,
+		}
+
+		const result = await adicionaEndereco({ data, token });
+
+		if (result.error) {
+			setErroSubmit(result.error)
+		} else {
+			setShowSuccess(true)
+		}
+
+	}
 
 	return (
 		<div>
@@ -24,9 +46,9 @@ function AddAddress() {
 				<h1>Adicionar Endereço</h1>
 			</div>
 
-			<div className='contentModal'>
+			<div style={{ display: showSuccess ? 'none' : 'block' }} className='contentModal'>
 
-				<form action="">
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<h3 >CEP</h3>
 					<Controller
 						control={control}
@@ -57,24 +79,24 @@ function AddAddress() {
 					<h3 >Endereço</h3>
 					<TextField
 						className={classes.formsdeCadastro}
-						id="input-email"
-						type='email'
+						id="input-endereco"
+						type='text'
 						variant="outlined"
 						autoComplete="off"
-						error={Boolean(errors.email)}
-						helperText={errors.email ? "Campo Obrigatório" : false}
-						{...register('email', { required: true })} />
+						error={Boolean(errors.endereco)}
+						helperText={errors.endereco ? "Campo Obrigatório" : false}
+						{...register('endereco', { required: true })} />
 
 					<h3 >Complemento</h3>
 					<TextField
 						className={classes.formsdeCadastro}
-						id="input-email"
-						type='email'
+						id="input-complemento"
+						type='text'
 						variant="outlined"
 						autoComplete="off"
-						error={Boolean(errors.email)}
-						helperText={errors.email ? "Campo Obrigatório" : false}
-						{...register('email', { required: true })} />
+						error={Boolean(errors.complemento)}
+						helperText={errors.complemento ? "Campo Obrigatório" : false}
+						{...register('complemento', { required: true })} />
 
 					<div className='flex-row actionButtons '>
 						<button
@@ -92,22 +114,24 @@ function AddAddress() {
 
 			{/* ----------------------ENDEREÇO ADICIONADO COM SUCESSO------------------------------ */}
 
-			<div className='content-modal-sucess'>
+			<div style={{ display: showSuccess ? 'block' : 'none' }}>
+				<div className='content-modal-sucess'>
 
-				<img src={successIcon} alt="endereço-adiconado-com-sucesso" />
-				<p className='font-color-gray font-size-4 font-weight-600'>Endereço adicionado com sucesso!</p>
-			</div>
+					<img src={successIcon} alt="endereço-adiconado-com-sucesso" />
+					<p className='font-color-gray font-size-4 font-weight-600'>Endereço adicionado com sucesso!</p>
+				</div>
 
-			<div className='flex-row actionButtons '>
-				<button
-					className='btn-orange-small font-montserrat font-color-white'
-					type='submit'
-					onClick={''}
-				>
-					Voltar para o carrinho
-				</button>
+				<div className='flex-row actionButtons '>
+					<button
+						className='btn-orange-small font-montserrat font-color-white'
+						type='submit'
+						onClick={() => setShowPage('cart')}
+					>
+						Voltar para o carrinho
+					</button>
 
 
+				</div>
 			</div>
 
 		</div>

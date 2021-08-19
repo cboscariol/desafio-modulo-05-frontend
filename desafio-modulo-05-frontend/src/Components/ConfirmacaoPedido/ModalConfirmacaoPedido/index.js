@@ -1,6 +1,4 @@
-import React from 'react';
-import { useStyles } from '../Components/AddAddress/styles';
-import { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../../Contexts/AuthContext';
 import closeIcon from '../Assets/close-icon.svg'
 import './styles.css';
@@ -13,25 +11,17 @@ import RealCart from '../Components/RealCart/RealCart'
 
 function EditarPerfil({ setOpenModal }) {
 	const { token } = useContext(AuthContext);
+	const [showPage, setShowPage] = useState("cart")
 
 	const handleClose = () => {
 		setOpenModal(false)
 	}
 
-	// const lala = 0
+	useEffect(() => {
+		console.log(showPage)
+	}, [])
 
-	// const renderSteps = () => {
-	// 	switch (lala) {
-	// 		case "carrinho":
-	// 			<RealCart />
-	// 			break;
-	// 		case "adicionar-endereco":
-	// 			<AddAddress />
-	// 			break;
-	// 		default:
-	// 			break;
-	// 	}
-	// }
+
 
 
 	return (
@@ -40,8 +30,7 @@ function EditarPerfil({ setOpenModal }) {
 			<div className='font-montserrat containerModal'>
 				<img src={closeIcon} className='closeModal' alt="fechar" onClick={handleClose} />
 				<div className='boxContainer'>
-					{/* {renderSteps} */}
-
+					{showPage === "cart" ? <RealCart setShowPage={setShowPage} /> : <AddAddress setShowPage={setShowPage} />}
 				</div>
 			</div>
 		</div>

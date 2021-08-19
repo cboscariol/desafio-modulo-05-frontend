@@ -28,10 +28,10 @@ function Routes() {
 				<Switch>
 					<Route path="/" exact component={Login} />
 					<Route path="/cadastro" exact component={Cadastro} />
-					<Route path="/modal" exact component={Modal} />
 
 					<RotasProtegidas >
 						<ProductsProvider>
+							<Route path="/modal" exact component={Modal} />
 							<Route path="/restaurantes" exact component={Restaurantes} />
 						</ProductsProvider>
 					</RotasProtegidas>
