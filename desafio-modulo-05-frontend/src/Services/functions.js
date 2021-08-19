@@ -287,6 +287,75 @@ export async function putEditProfile(token, perfilEditado) {
 	}
 }
 
+export async function finalizarPedido({ cart, token }) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/restaurantes/:id/finalizar-pedido', {
+			method: 'POST',
+			body: JSON.stringify(cart),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erro: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return error.message;
+	}
+}
+
+export async function adicionaEndereco({ data, token }) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/clientes/enderecos', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erro: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return error.message;
+	}
+}
+
+export async function getEndereco(token) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/clientes/enderecos', {
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erro: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return error.message;
+	}
+}
+
 
 
 

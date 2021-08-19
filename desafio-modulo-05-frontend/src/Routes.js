@@ -7,13 +7,12 @@ import {
 import { useContext } from 'react';
 import { AuthContext } from './Contexts/AuthContext'
 import AuthProvider from './Contexts/AuthContext';
-import CadastroProvider from './Contexts/CadastroContext';
-
 import Login from "./Pages/Login";
 import Cadastro from "./Pages/Cadastro";
 import Restaurantes from './Pages/Restaurantes';
 import Cardapio from './Pages/Cardapio';
 import { ProductsProvider } from './Contexts/ProductsContext';
+import Modal from './Components/ConfirmacaoPedido/ModalConfirmacaoPedido'
 
 function RotasProtegidas(props) {
 	const { token } = useContext(AuthContext);
@@ -29,10 +28,11 @@ function Routes() {
 			<Router>
 				<Switch>
 					<Route path="/" exact component={Login} />
-					<Route path="/cadastro" exact component={Cadastro}>
-					</Route>
+					<Route path="/cadastro" exact component={Cadastro} />
+
 					<RotasProtegidas >
 						<ProductsProvider>
+							<Route path="/modal" exact component={Modal} />
 							<Route path="/restaurantes" exact component={Restaurantes} />
 							<Route path="/cardapio/:id" exact component={Cardapio} />
 						</ProductsProvider>
