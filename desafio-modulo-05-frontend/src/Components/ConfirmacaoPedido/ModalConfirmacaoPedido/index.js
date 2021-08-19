@@ -9,12 +9,12 @@ import RealCart from '../Components/RealCart/RealCart'
 
 
 
-function EditarPerfil({ setOpenModal }) {
+function EditarPerfil({ setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
 	const [showPage, setShowPage] = useState("cart")
 
 	const handleClose = () => {
-		setOpenModal(false)
+		setOpenRevisaoPedido(false)
 	}
 
 	useEffect(() => {
