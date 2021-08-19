@@ -1,0 +1,158 @@
+.wrapperModal{
+	padding: 50px 0;
+	background-color: rgba(32, 32, 32, 0.60);
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1000;
+}
+
+.containerModal{
+	width: 625px;
+	height: min-content;
+	align-items: center;
+	margin: 0 auto;
+	box-shadow: 0px 4px 16px rgba(50, 50, 50, 0.4);
+	border-radius: 16px;
+	background-color: white;
+}
+
+
+.formsModal{
+	gap: 20px;
+	display: flex;
+	margin-bottom: 40px;
+}
+
+
+.uploadDivModal{
+	height: 250px;
+	width: 250px;
+	margin-left: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+}
+
+.labelModal{
+	color: white;;
+	font-weight: 600;
+	font-size: 14px;
+	text-align: center;
+	position: absolute;
+	bottom: 20px;
+
+
+}
+
+.loadingContainer {
+	height: 1120px;
+	width: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.headerModal{
+	background-repeat: no-repeat;
+    background-size: auto;
+	background-color: lightgrey;
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+    height: 11rem;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+/* .headerModal img {
+	transform: translate(60px);
+} */
+
+.inputModal{
+	min-width: 408px;
+	gap: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	color: #393C40;
+}
+
+.actionButtons button{
+	display: flex;
+}
+
+.MuiAlert-root {
+	font-family: 'Montserrat', sans-serif !important;
+	font-size: 13px !important;
+	border-radius: 16px !important;
+	padding: 6px 10px !important;
+	margin-bottom: 10px;
+}
+
+.title {
+	color: rgba(82, 84, 89, 1);
+	font-weight: 600;
+	width: 90%;
+	justify-content: flex-start;
+}
+.close-icon {
+	margin-right: 3rem;
+	margin-top: 3rem;
+}
+
+.img-restaurante {
+	border-radius: 50%;
+    border: 6px solid white;
+    margin-left: 5rem;
+    margin-right: 2rem;
+    margin-top: 7rem;
+	width: 121px;
+	height: 121px;
+    position: absolute;
+    z-index: 1;
+}
+
+.restaurant-info-carrinho {
+    width: 30rem;
+    justify-content: space-between;
+}
+
+.restaurant-info-carrinho-2 {
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 400;  
+}
+
+.restaurante-info-carrinho-3 {
+	width: 30rem;
+	justify-content: space-between;
+	margin-top: 2rem;
+}
+
+.restaurante-descricao {
+	width: 15rem;
+}
+
+.preco-div {
+	background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;
+	border-radius: 4px;
+	width: 10rem;
+	height: 3rem;
+	color: #006335;
+	font-weight: bold;
+}
+
+.div-contador {
+	width: 20rem;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	justify-content: space-between;
+}
+
+.div-contador-2 {
+	width: min-content;
+	gap: 1rem;
+}

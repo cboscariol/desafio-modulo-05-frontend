@@ -9,13 +9,18 @@ import InputSenha from '../InputSenha/inputSenha'
 import { useForm, Controller } from "react-hook-form";
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext';
+import closeIcon from '../../Assets/close-icon.svg'
 import { getCategorias, getProfileDetails, putEditProfile } from '../../Services/functions';
 import './styles.css';
 
 
 
-function EditarPerfil() {
+function EditarPerfil({ setOpenModal }) {
 	const { token } = useContext(AuthContext);
+
+	const handleClose = () => {
+		setOpenModal(false)
+	}
 
 
 	return (
@@ -24,6 +29,7 @@ function EditarPerfil() {
 			<div className='font-montserrat containerModal'>
 				<div className='headerModal'>
 					<h1>Título do modal</h1>
+					<img src={closeIcon} alt="fechar" />
 				</div>
 
 
@@ -32,7 +38,7 @@ function EditarPerfil() {
 					<button
 						className='btn-orange-small font-montserrat font-color-white'
 						type='submit'
-						onClick={''}
+						onClick={handleClose}
 					>
 						texto do botão
 					</button>

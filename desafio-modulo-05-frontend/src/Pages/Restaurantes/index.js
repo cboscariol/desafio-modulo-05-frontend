@@ -51,10 +51,11 @@ function Restaurantes() {
 
 		filtrarRestaurante()
 	}, [filtro])
-	
+
+
 	return (
 		<div className='flex-column items-center container-products'>
-			<Header />
+			<Header  />
 			<img className='linhaLaranja' src={LinhaLaranja} alt=""/>
 
 			
@@ -73,15 +74,16 @@ function Restaurantes() {
 					</div>
 
 					{filtro ?
-						<div className='grid'>
+						<div className='grid' >
 								{restauranteFiltrado.map((r) => {
 									return (
 										<CardRestaurante
 											key={r.id_restaurante}
-											id_restaurante={r.id_restaurante}
+											id_restaurante={r.usuario_id}
 											nome={r.nome}
 											descricao={r.descricao}
 											img={r.imagem}
+											
 										/>
 									)
 									})	
@@ -100,14 +102,16 @@ function Restaurantes() {
 					:
 							
 						<div className='grid'>
+							{console.log(restaurantes, "antes do map restaurantes")}
 							{restaurantes.map((r) => {
 								return (
 									<CardRestaurante
 										key={r.id_restaurante}
-										id_restaurante={r.id_restaurante}
+										id_restaurante={r.usuario_id}
 										nome={r.nome}
 										descricao={r.descricao}
 										img={r.imagem}
+										
 									/>
 								)
 								})	
