@@ -9,6 +9,9 @@ import './styles.css';
 import User from '../../Assets/user.jpg';
 import Money from '../../Assets/money-icon.svg';
 import Time from '../../Assets/time-icon.svg';
+import Add from '../../Assets/add-icon.png';
+import Remove from '../../Assets/remove-icon.png';
+import Delete from '../../Assets/delete-icon.png';
 
 
 function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
@@ -18,12 +21,39 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	const [ count, setCount ] = useState(0);
 	const [ showDiv, setShowDiv ] = useState(true);
 	const [ showDivImg, setShowDivImg ] = useState(false);
-	console.log(produto, 'carrinho produto')
+	const [ produtoExiste, setProdutoExiste ] = useState();
+	const [ produtoExcluido, setProdutoExcluido ] = useState(false);
+
+
+	useEffect(() => {
+		function verificaProduto(){
+			if(confirmCart){
+			setProdutoExiste(confirmCart.find((p) => p.id === produto.id));
+			}
+		}
+
+		verificaProduto()
+	}, [])
+
+	useEffect(() => {
+		function verificaProdutoQtd(){
+			if(produtoExiste){
+				setCount(produtoExiste.quantidade)
+			}
+		}
+		verificaProdutoQtd()
+	}, [produtoExiste])
+	
 	function handleClose() {
 		setOpenCarrinho(false)
 	}
 
-	function handleCart(){
+	function handleOpenRevisao() {
+		setOpenCarrinho(false)
+		setOpenRevisaoPedido(true)
+	}
+
+	function handleCart() {
 		const carrinhoAtual = [...confirmCart]
 
 		if(count === 0){
@@ -36,10 +66,9 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 			}
 		}
 
-		const produtoExiste = carrinhoAtual.find((p) => p.id === produto.id);
-
+	
 		if(produtoExiste){
-			produtoExiste.quantidade += count;
+			produtoExiste.quantidade = count;
 
 			setConfirmCart(carrinhoAtual)
 			setShowDiv(false)
@@ -62,18 +91,29 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 		const newCart = confirmCart;
 		newCart.push(produtoCart);
 		setConfirmCart([...newCart]);
-	
-		
 		setShowDiv(false)
 		setShowDivImg(true)
+		return
 	}
 
 	function handleRemove(){
-		if(count === 0){
+		if(produtoExiste && count < 2){
+		
+			const newArray = [...confirmCart];
+			const index = newArray.findIndex((e) => e.id === produtoExiste.id)
+		
+			setShowDiv(false)
+			setShowDivImg(true)
+			setConfirmCart(newArray.filter((produto, i) => i !== index ))
+			setProdutoExcluido(true);
 			return
+		}
+
+		if(count === 0){
+			return setErro("Não é possível remover um produto que não está no carrinho")
 		}else {
 			const newValue = count - 1;
-			setCount(newValue); 
+			return setCount(newValue); 
 		} 
 	}
 
@@ -83,7 +123,6 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	}
 
 	return (
-
 
 		<div className='wrapperModalCarrinho'>
 			<div className='flex-column font-montserrat containerModalCarrinho'>
@@ -97,11 +136,11 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 				<div className='flex-row items-center restaurant-info-carrinho'>
 
 						<div className='flex-row items-center font-montserrat font-color-gray restaurant-info-carrinho-2'>
-							<div className='div-icon'><img src={Money} alt="icon" /></div>
+							<div className='div-icon-carrinho'><img src={Money} alt="icon" /></div>
 							<p>{`Pedido mínimo: R$${(restaurante.valor_minimo_pedido/100).toFixed(2)}`}</p>
 						</div>
 						<div className='flex-row items-center font-montserrat font-color-gray restaurant-info-carrinho-2'>
-							<div className='div-icon'><img src={Time} alt="icon" /></div>
+							<div className='div-icon-carrinho'><img src={Time} alt="icon" /></div>
 							<p>{`Tempo de entrega: ${restaurante.tempo_entrega_minutos}  minutos`}</p>
 						</div>
 				</div>
@@ -116,9 +155,15 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 
 					<div className='flex-row items-center div-contador'>
 						<div className='flex-row items-center  div-contador-2'>
-							<img className='' src={closeIcon} alt="fechar" onClick={()=>handleRemove()} />
+							<div style={{backgroundColor: '#D13201', width: '25px', height: '25px'}}>
+								<img style={{width: '25px', height: '25px'}}src={produtoExiste && count < 2 ? Delete : Remove} alt="fechar" onClick={()=>handleRemove()} />
+							</div>
+
 							<p>{count}</p>
-							<img className='' src={closeIcon} alt="fechar" onClick={()=>handleAdd()} />
+
+							<div style={{backgroundColor: '#D13201', width: '25px', height: '25px'}}>
+								<img style={{width: '25px', height: '25px'}}src={Add} alt="fechar" onClick={()=>handleAdd()} />
+							</div>
 						</div>
 
 
@@ -128,24 +173,28 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 								type='submit'
 								onClick={() => handleCart()}
 							>
-								Adicionar ao carrinho
+								{produtoExiste ? "Editar Pedido" : "Adicionar ao carrinho"}
 							</button>
 						</div>
+
+
 					</div>
 				</div>
 
 				<div className={showDivImg? "flex-column items-center content-center div-showImg" : "none"}>
 					<img src={ShoppingCart} alt='icone carrinho' />
-					<p className='font-montserrat font-bold font-color-gray font-size-3'>Pedido adicionado!</p>
+					<p className='font-montserrat font-bold font-color-gray font-size-3'>{produtoExcluido ? 'Produto excluído!' : "Produto adicionado!"}</p>
 				</div>
 
+				
 				{confirmCart.length > 0 ?
-				<div>
+				<div onClick={() => handleOpenRevisao()}>
 					<p className='font-montserrat font-color-gray font-weigth-600 font-size-3'>ir para a revisão do pedido</p>
 				</div>
 				:
 				""
 				}
+				
 
 				{erro &&
 				<Alert severity='error'>{erro}</Alert>
