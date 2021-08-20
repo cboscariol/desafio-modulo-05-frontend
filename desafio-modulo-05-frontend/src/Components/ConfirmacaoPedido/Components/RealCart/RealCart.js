@@ -1,5 +1,6 @@
 import cartIcon from '../../Assets/yellow-cart.svg'
 import lineModal from '../../Assets/line-modal.svg'
+import Alert from '@material-ui/lab/Alert';
 import './styles.css';
 import CardCart from '../../../../Components/CardCart'
 import { useState, useEffect, useContext } from 'react';
@@ -17,7 +18,6 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 	const [addressDetails, setAddressDetails] = useState()
 	const [erroSubmit, setErroSubmit] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
-	const [noItensOnCart, setNoItensOnCart] = useState(false)
 	const history = useHistory()
 
 
@@ -69,6 +69,10 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 		} else {
 			setShowSuccess(true)
 		}
+	}
+
+	const handleCloseErrorAlert = () => {
+		setErroSubmit('')
 	}
 
 	const getSubTotal = () => {
@@ -124,6 +128,9 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 				<img src={cartIcon} alt="icone-carrinho-de-compras-amarelo" />
 				<h1>{restaurante.nome}</h1>
 			</header>
+			<div className='alert-confirmacao-pedido'>
+				{erroSubmit && <Alert variant="filled" severity="error" onClose={handleCloseErrorAlert}>{erroSubmit}</Alert>}
+			</div>
 
 
 			<div className='contentModal'
