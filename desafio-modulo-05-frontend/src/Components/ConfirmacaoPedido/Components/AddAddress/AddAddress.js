@@ -95,14 +95,12 @@ function AddAddress({ setShowPage }) {
 						variant="outlined"
 						autoComplete="off"
 						error={Boolean(errors.complemento)}
-						helperText={errors.complemento ? "Campo Obrigatório" : false}
-						{...register('complemento', { required: true })} />
+						{...register('complemento')} />
 
 					<div className='flex-row actionButtons '>
 						<button
 							className='btn-orange-small font-montserrat font-color-white'
 							type='submit'
-							onClick={''}
 						>
 							Adicionar endereço
 						</button>

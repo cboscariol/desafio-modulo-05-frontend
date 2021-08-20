@@ -1,19 +1,16 @@
 import { useState } from "react";
 
 export default function useProductsProvider() {
-	const [produtos, setProdutos] = useState([]);
+	const [produtos, setProdutos] = useState([])
 	const [atualizaProduto, setAtualizaProduto] = useState(false);
-  const [ atualizaCardapio, setAtualizaCardapio ] = useState(false);
-	const [restaurante, setRestaurante] = useState([])
-	const [confirmCart, setConfirmCart] = useState([]);
-
-	console.log(confirmCart, "confirmCart")
+	const [restaurante, setRestaurante] = useState({})
+	const [confirmCart, setConfirmCart] = useState();
 
 	return {
 		produtos,
 		setProdutos,
-		atualizaCardapio,
-    setAtualizaCardapio,
+    atualizaCardapio,
+		setAtualizaCardapio,
 		restaurante,
 		setRestaurante,
 		confirmCart,

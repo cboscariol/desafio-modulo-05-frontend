@@ -9,7 +9,7 @@ import RealCart from '../Components/RealCart/RealCart'
 
 
 
-function EditarPerfil({ setOpenRevisaoPedido }) {
+function ConfirmacaoPedido({ setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
 	const [showPage, setShowPage] = useState("cart")
 
@@ -45,4 +45,4 @@ function EditarPerfil({ setOpenRevisaoPedido }) {
 	)
 }
 
-export default EditarPerfil
+export default ConfirmacaoPedido
