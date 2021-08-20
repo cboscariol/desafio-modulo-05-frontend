@@ -34,6 +34,14 @@
 	margin: 30px auto;
 	display: flex;
 	justify-content: center;
+
+}
+
+.actionButtons a {
+	text-decoration:none;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 11px 40px;
 }
 
 .content-modal-no-itens img {

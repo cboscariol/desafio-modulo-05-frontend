@@ -5,12 +5,12 @@ import './style.css'
 function CardCart(props) {
 
 	return (
-		<div className='containerProductCart'>
+		<div className='containerProductCart' onClick={props.onClick}>
 			<img src={props.imagem} alt="imagem-do-produto" />
 			<div>
 				<h3>{props.nome}</h3>
 				<p>{props.quantidade}</p>
-				<p className='valueBox'>{props.precoTotal}</p>
+				<p className='valueBox'>{props.precoTotal / 100}</p>
 			</div>
 		</div>
 	)

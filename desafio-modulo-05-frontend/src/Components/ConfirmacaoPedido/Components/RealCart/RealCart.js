@@ -10,35 +10,15 @@ import { AuthContext } from '../../../../Contexts/AuthContext'
 import { ProductsContext } from '../../../../Contexts/ProductsContext'
 import { finalizarPedido, getEndereco } from '../../../../Services/functions'
 
-function RealCart({ setShowPage }) {
+function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
-	const {
-		produtos,
-		setProdutos,
-		atualizaCardapio,
-		setAtualizaCardapio,
-		restaurante,
-		setRestaurante,
-		confirmCart,
-		setConfirmCart } = useContext(ProductsContext);
-	console.log({
-		produtos,
-		setProdutos,
-		atualizaCardapio,
-		setAtualizaCardapio,
-		restaurante,
-		setRestaurante,
-		confirmCart,
-		setConfirmCart
-	})
+	const { restaurante, confirmCart } = useContext(ProductsContext);
 	const [showAddress, setShowAddress] = useState(false)
 	const [addressDetails, setAddressDetails] = useState()
 	const [erroSubmit, setErroSubmit] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
 	const [noItensOnCart, setNoItensOnCart] = useState(false)
 	const history = useHistory()
-	// const [restaurante, setRestaurante] = useState([]);
-
 
 
 	const addAddress = () => {
@@ -51,7 +31,10 @@ function RealCart({ setShowPage }) {
 
 	const getEndereço = async () => {
 		const result = await getEndereco(token)
-		if (!result.error) {
+
+		if (result.cep === undefined) {
+			setShowAddress(false)
+		} else {
 			setAddressDetails(result)
 			setShowAddress(true)
 		}
@@ -61,11 +44,17 @@ function RealCart({ setShowPage }) {
 		getEndereço()
 	}, [])
 
+	function openProductDetails(produto) {
+		setProdutoEscolhido(produto);
+		setOpenCarrinho(true);
+		closeRevisaoPedido();
+	}
+
 	const onSubmit = async () => {
 		const subTotal = getSubTotal()
 
 		const cart = {
-			produtos,
+			produtos: confirmCart,
 			subtotal: subTotal,
 			taxaEntrega: restaurante.taxa_entrega,
 			total: subTotal + restaurante.taxa_entrega,
@@ -83,8 +72,49 @@ function RealCart({ setShowPage }) {
 	}
 
 	const getSubTotal = () => {
-		const result = produtos.reduce((acc, produto) => acc + produto.precoTotal, 0)
+		const result = confirmCart.reduce((acc, produto) => acc + produto.precoTotal, 0)
 		return result
+	}
+
+	const renderOrderInfos = () => {
+		return (
+			<>
+				<p className='font-bold font-size-2'>Tempo de Entrega: <span className='font-size-1 '>{restaurante.tempo_entrega_minutos} min</span></p>
+
+
+
+				{confirmCart.map((produto) => (
+					<CardCart
+						imagem={produto.imagem}
+						nome={produto.nome}
+						quantidade={produto.quantidade}
+						precoTotal={produto.precoTotal}
+						onClick={() => openProductDetails(produto)}
+					/>
+				))}
+
+
+
+				<a href={`/cardapio/${restaurante.id}`}>Adicionar mais itens ao pedido</a>
+
+				<img src={lineModal} alt="" />
+
+				<div className='finalCart font-color-gray font-size-3 '>
+					<p className='finalCartStyle'>Subtotal <spam>R$ {getSubTotal() / 100}</spam> </p>
+					<p className='finalCartStyle'>Taxa de entrega<spam>R$ {restaurante.taxa_entrega / 100}</spam> </p>
+					<p className='finalCartStyle'>Total <spam className='font-size-1'>R$ {(restaurante.taxa_entrega + getSubTotal()) / 100}</spam> </p>
+				</div>
+				<div className='flex-row actionButtons '>
+					<button
+						className='btn-orange-small font-montserrat font-color-white'
+						type='submit'
+						onClick={onSubmit}
+					>
+						Confirmar Pedido
+					</button>
+				</div>
+			</>
+		)
 	}
 
 
@@ -94,16 +124,6 @@ function RealCart({ setShowPage }) {
 				<img src={cartIcon} alt="icone-carrinho-de-compras-amarelo" />
 				<h1>{restaurante.nome}</h1>
 			</header>
-
-			{produtos.length === 0 ?
-				<div className='content-modal-no-itens'>
-					<img src={semItensCarrinho} alt="endereço-adiconado-com-sucesso" />
-				</div>
-				:
-				""
-			}
-
-
 
 
 			<div className='contentModal'
@@ -116,37 +136,20 @@ function RealCart({ setShowPage }) {
 					<button className='addAddress' onClick={addAddress}>Adicionar endereço</button>
 
 				}
-				<p className='font-bold font-size-2'>Tempo de Entrega: <span className='font-size-1 '>{restaurante.tempo_entrega_minutos} min</span></p>
+
+				{confirmCart.length === 0 ?
+					<div className='content-modal-no-itens'>
+						<img src={semItensCarrinho} alt="endereço-adiconado-com-sucesso" />
+					</div>
+					:
+					renderOrderInfos()
+				}
 
 
-				{produtos.map((produto) => (
-					<CardCart
-						imagem={produto.imagem}
-						nome={produto.nome}
-						quantidade={produto.quantidade}
-						precoTotal={produto.precoTotal} />
-				))}
 
 
 
-				<a href={`/cardapio/${restaurante.id}`}>Adicionar mais itens ao pedido</a>
 
-				<img src={lineModal} alt="" />
-
-				<div className='finalCart font-color-gray font-size-3 '>
-					<p className='finalCartStyle'>Subtotal <spam>R$ {getSubTotal()}</spam> </p>
-					<p className='finalCartStyle'>Taxa de entrega<spam>R$ {restaurante.taxa_entrega}</spam> </p>
-					<p className='finalCartStyle'>Total <spam className='font-size-1'>R$ {restaurante.taxa_entrega + getSubTotal()}</spam> </p>
-				</div>
-				<div className='flex-row actionButtons '>
-					<button
-						className='btn-orange-small font-montserrat font-color-white'
-						type='submit'
-						onClick={onSubmit}
-					>
-						Confirmar Pedido
-					</button>
-				</div>
 
 			</div>
 
@@ -162,13 +165,7 @@ function RealCart({ setShowPage }) {
 
 
 				<div className='flex-row actionButtons '>
-					<button
-						className='btn-orange-small font-montserrat font-color-white'
-						type='submit'
-						onClick={redirect}
-					>
-						Voltar para o cardápio
-					</button>
+					<a href={`/cardapio/${restaurante.id}`} className='btn-orange-small font-montserrat font-color-white' >Voltar para o cardápio</a>
 				</div>
 			</div>
 
