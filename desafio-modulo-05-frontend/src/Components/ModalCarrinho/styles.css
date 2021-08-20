@@ -1,15 +1,15 @@
-.wrapperModal{
+.wrapperModalCarrinho {
 	padding: 50px 0;
 	background-color: rgba(32, 32, 32, 0.60);
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	min-height: 100vh;
 	z-index: 1000;
 }
 
-.containerModal{
+.containerModalCarrinho {
 	width: 625px;
 	height: min-content;
 	align-items: center;
@@ -19,45 +19,7 @@
 	background-color: white;
 }
 
-
-.formsModal{
-	gap: 20px;
-	display: flex;
-	margin-bottom: 40px;
-}
-
-
-.uploadDivModal{
-	height: 250px;
-	width: 250px;
-	margin-left: 20px;
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 32px;
-}
-
-.labelModal{
-	color: white;;
-	font-weight: 600;
-	font-size: 14px;
-	text-align: center;
-	position: absolute;
-	bottom: 20px;
-
-
-}
-
-.loadingContainer {
-	height: 1120px;
-	width: 400px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.headerModal{
+.headerModalCarrinho {
 	background-repeat: no-repeat;
     background-size: auto;
 	background-color: lightgrey;
@@ -68,21 +30,6 @@
 	align-items: flex-end;
 }
 
-/* .headerModal img {
-	transform: translate(60px);
-} */
-
-.inputModal{
-	min-width: 408px;
-	gap: 20px;
-	font-family: 'Montserrat', sans-serif;
-	font-weight: 600;
-	color: #393C40;
-}
-
-.actionButtons button{
-	display: flex;
-}
 
 .MuiAlert-root {
 	font-family: 'Montserrat', sans-serif !important;
@@ -147,7 +94,7 @@
 
 .div-contador {
 	width: 20rem;
-	margin-top: 2rem;
+	margin-top: 2.3rem;
 	margin-bottom: 1rem;
 	justify-content: space-between;
 }
@@ -155,4 +102,9 @@
 .div-contador-2 {
 	width: min-content;
 	gap: 1rem;
+}
+
+.div-showImg {
+	width: 30rem;
+	height: 15rem;
 }

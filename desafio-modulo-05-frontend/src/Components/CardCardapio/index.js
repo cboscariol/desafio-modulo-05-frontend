@@ -16,7 +16,7 @@ import {
 
 
 
-export default function CardCardapio({ id_restaurante, nome, descricao, img, preco }) {
+export default function CardCardapio({ setOpenCarrinho, setProdutoEscolhido, id, nome, descricao, img, preco }) {
   const classes = useStyles();
   const history = useHistory();
   const [ carregando, setCarregando ] = useState(false);
@@ -27,10 +27,22 @@ export default function CardCardapio({ id_restaurante, nome, descricao, img, pre
       setErro('');
   }
 
+  function handleClick(){
+		const produto = {
+			nome: nome,
+			imagem: img,
+			preco: preco,
+      descricao: descricao,
+			id: id
+		}
+		console.log(produto, 'produto')
+		setProdutoEscolhido(produto);
+		setOpenCarrinho(true);
+	}
  
 
   return (
-    <Card id='card' className={classes.root} >
+    <Card id='card' className={classes.root} onClick={() => handleClick()}>
       <CardContent className={classes.cardContent} >
         <div className={classes.divContent}>
             <h2 className={classes.h2}>{nome}</h2>
