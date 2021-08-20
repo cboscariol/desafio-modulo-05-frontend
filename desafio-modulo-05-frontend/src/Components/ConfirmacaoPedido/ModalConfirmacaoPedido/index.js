@@ -9,7 +9,7 @@ import RealCart from '../Components/RealCart/RealCart'
 
 
 
-function ConfirmacaoPedido({ setOpenRevisaoPedido }) {
+function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEscolhido }) {
 	const { token } = useContext(AuthContext);
 	const [showPage, setShowPage] = useState("cart")
 
@@ -30,7 +30,7 @@ function ConfirmacaoPedido({ setOpenRevisaoPedido }) {
 			<div className='font-montserrat containerModal'>
 				<img src={closeIcon} className='closeModal' alt="fechar" onClick={handleClose} />
 				<div className='boxContainer'>
-					{showPage === "cart" ? <RealCart setShowPage={setShowPage} /> : <AddAddress setShowPage={setShowPage} />}
+					{showPage === "cart" ? <RealCart closeRevisaoPedido={handleClose} setShowPage={setShowPage} setOpenCarrinho={setOpenCarrinho} setProdutoEscolhido={setProdutoEscolhido} /> : <AddAddress setShowPage={setShowPage} />}
 				</div>
 			</div>
 		</div>
