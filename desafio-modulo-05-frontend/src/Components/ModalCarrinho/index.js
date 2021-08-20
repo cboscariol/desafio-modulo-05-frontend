@@ -14,7 +14,7 @@ import Remove from '../../Assets/remove-icon.png';
 import Delete from '../../Assets/delete-icon.png';
 
 
-function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
+export default function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
 	const [erro, setErro] = useState('');
 	const { confirmCart, setConfirmCart, restaurante } = useProductsContext();
@@ -117,7 +117,7 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 			const newValue = count - 1;
 			return setCount(newValue); 
 		} 
-	
+	}
 
 	function handleAdd() {
 		const newValue = count + 1;
@@ -209,5 +209,3 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 		</div >
 	)
 }
-
-export default ModalCarrinho
