@@ -44,8 +44,8 @@ export async function getRestaurante(token, id) {
 
 export async function getCardapio(token, id) {
 	console.log(Number(id.id), "id da funcao cardapio")
-	
-	
+
+
 	try {
 		const resposta = await fetch(`https://icubus-clientes.herokuapp.com/restaurantes/${id}/produtos/ativos`, {
 			headers: {
@@ -60,8 +60,8 @@ export async function getCardapio(token, id) {
 			return { erros: lista }
 		}
 		console.log(lista, "funcao cardapio")
-		return { lista }  ;
-		
+		return { lista };
+
 	}
 	catch (error) {
 		return { errorGet: error.message };
@@ -287,9 +287,9 @@ export async function putEditProfile(token, perfilEditado) {
 	}
 }
 
-export async function finalizarPedido({ cart, token }) {
+export async function finalizarPedido({ cart, token, id }) {
 	try {
-		const resposta = await fetch('https://icubus-clientes.herokuapp.com/restaurantes/:id/finalizar-pedido', {
+		const resposta = await fetch(`https://icubus-clientes.herokuapp.com/restaurantes/${id}/finalizar-pedido`, {
 			method: 'POST',
 			body: JSON.stringify(cart),
 			headers: {
