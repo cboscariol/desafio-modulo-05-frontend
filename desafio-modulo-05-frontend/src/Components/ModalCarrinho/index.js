@@ -11,7 +11,7 @@ import Money from '../../Assets/money-icon.svg';
 import Time from '../../Assets/time-icon.svg';
 
 
-function ModalCarrinho({ setOpenCarrinho, produto }) {
+function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
 	const [ erro, setErro ] = useState('');
 	const { confirmCart, setConfirmCart, restaurante } = useProductsContext();
@@ -84,6 +84,7 @@ function ModalCarrinho({ setOpenCarrinho, produto }) {
 
 	return (
 
+
 		<div className='wrapperModalCarrinho'>
 			<div className='flex-column font-montserrat containerModalCarrinho'>
 				<div className='headerModalCarrinho flex-column' style={{backgroundImage: `url(${produto.imagem})`, backgroundPosition: 'center center'}}>
@@ -94,6 +95,7 @@ function ModalCarrinho({ setOpenCarrinho, produto }) {
 				<div className='flex-row font-montserrat title'><h1>{produto.nome}</h1></div>
 
 				<div className='flex-row items-center restaurant-info-carrinho'>
+
 						<div className='flex-row items-center font-montserrat font-color-gray restaurant-info-carrinho-2'>
 							<div className='div-icon'><img src={Money} alt="icon" /></div>
 							<p>{`Pedido mínimo: R$${(restaurante.valor_minimo_pedido/100).toFixed(2)}`}</p>
@@ -111,12 +113,14 @@ function ModalCarrinho({ setOpenCarrinho, produto }) {
 						<div className='flex-row items-center content-center preco-div'>{`R$${(produto.preco/100).toFixed(2)}`} </div>
 					</div>
 
+
 					<div className='flex-row items-center div-contador'>
 						<div className='flex-row items-center  div-contador-2'>
 							<img className='' src={closeIcon} alt="fechar" onClick={()=>handleRemove()} />
 							<p>{count}</p>
 							<img className='' src={closeIcon} alt="fechar" onClick={()=>handleAdd()} />
 						</div>
+
 
 						<div className='flex-row'>
 							<button
