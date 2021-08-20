@@ -72,7 +72,7 @@ function Header({ idRestaurante }) {
 	
 
 	return (
-		<div className='flex-row items-flex-end headerProducts' style={{backgroundImage: `url(${background})`}}>
+		<div className='flex-row items-flex-end headerProducts' style={{backgroundImage: `url(${background})`, backgroundPosition: 'center center', backgroundSize: 'cover'}}>
 			<img className='imgProfile' src={imagemPerfil ? imagemPerfil : UserImage} alt='background pizzaria' />
 			{/* {openModal && <NewEditProfile setOpenModal={setOpenModal} setImagemPerfil={setImagemPerfil} />} */}
 			<h1 className='font-baloo font-color-white title-header'>{restaurante ? restaurante.nome: "Restaurantes"}</h1>

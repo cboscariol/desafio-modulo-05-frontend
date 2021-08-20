@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+import useProductsContext from '../../Hooks/useContextProducts';
 import Header from '../../Components/Header';
 import ModalCarrinho from '../../Components/ModalCarrinho';
 import CardCardapio from '../../Components/CardCardapio';
@@ -16,14 +17,16 @@ import './style.css';
 
 function Cardapio() {
 	const { token } = useContext(AuthContext);
-	const restaurante_id = useParams();
-	const [erro, setErro] = useState('');
-	const [openCarrinho, setOpenCarrinho] = useState(false);
-	const [cardapio, setCardapio] = useState([]);
-	const [restaurante, setRestaurante] = useState([]);
-	const [restauranteId, setRestauranteId] = useState(restaurante_id.id)
-	const [openRevisaoPedido, setOpenRevisaoPedido] = useState(false)
 
+    const restaurante_id  = useParams();
+	const [ erro, setErro ] = useState('');
+	const [ openCarrinho, setOpenCarrinho ] = useState(false);
+	const [ cardapio, setCardapio ] = useState([]);
+	const [ produtoEscolhido, setProdutoEscolhido ] = useState();
+	const { restaurante, setRestaurante } = useProductsContext();
+	const [ restauranteId, setRestauranteId ] = useState(restaurante_id.id)
+  const [openRevisaoPedido, setOpenRevisaoPedido] = useState(false)
+	
 	async function listarCardapio() {
 		const { lista, erros, errorGet } = await getCardapio(token, restauranteId);
 
@@ -60,9 +63,12 @@ function Cardapio() {
 		listarRestaurante();
 	}, []);
 
+
+
 	function handleClick() {
 		setOpenCarrinho(true);
 	}
+
 
 	function revisaoPedido() {
 		setOpenRevisaoPedido(true)
@@ -71,7 +77,7 @@ function Cardapio() {
 	return (
 		<div className='flex-column items-center container-products'>
 			{openCarrinho === true ?
-				<ModalCarrinho setOpenCarrinho={setOpenCarrinho} />
+				<ModalCarrinho setOpenCarrinho={setOpenCarrinho} produto={produtoEscolhido}/>
 				:
 				""
 			}
@@ -99,34 +105,35 @@ function Cardapio() {
 						<div className='div-icon'><img src={Money} alt="icon" /></div>
 						<p>{`Pedido mínimo: R$${(restaurante.valor_minimo_pedido / 100).toFixed(2)}`}</p>
 					</div>
-					<div className='flex-row items-center font-montserrat font-color-gray restaurant-info-2'>
+          <div className='flex-row items-center font-montserrat font-color-gray restaurant-info-2'>
 						<div className='div-icon'><img src={Time} alt="icon" /></div>
 						<p>{`Tempo de entrega: ${restaurante.tempo_entrega_minutos} minutos`}</p>
 					</div>
-					<div className='flex-row items-center font-montserrat font-color-gray'>
+          <div className='flex-row items-center font-montserrat font-color-gray'>
 						<p>{restaurante.descricao}</p>
 					</div>
-				</div>
-
-
-				{cardapio.length > 0 ?
-					<div className='grid' onClick={() => handleClick()}>
-						{cardapio.map((r) => {
-							return (
-								<CardCardapio
-									key={r.id_restaurante}
-									id_restaurante={r.id_restaurante}
-									nome={r.nome}
-									descricao={r.descricao}
-									img={r.imagem}
-									preco={r.preco}
-								/>
-							)
-						})
-						}
-
-					</div>
-
+          </div>
+					
+					{cardapio.length > 0 ?
+						<div className='grid' >
+								{cardapio.map((r) => {
+									return (
+										<CardCardapio
+											key={r.id}
+											id={r.id}
+											nome={r.nome}
+											descricao={r.descricao}
+											img={r.imagem}
+                                            preco={r.preco}
+											setOpenCarrinho={setOpenCarrinho}
+											setProdutoEscolhido={setProdutoEscolhido}
+										/>
+									)
+									})	
+								}
+	
+						</div>	
+	
 					:
 
 					<div className='flex-column content-center items-center font-montserrat semProdutos'>
