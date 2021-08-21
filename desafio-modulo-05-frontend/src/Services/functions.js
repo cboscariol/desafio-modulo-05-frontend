@@ -301,13 +301,13 @@ export async function finalizarPedido({ cart, token, id }) {
 		const dados = await resposta.json();
 
 		if (resposta.status >= 400) {
-			return { erro: dados }
+			return { error: dados }
 		}
 
 		return dados
 	}
 	catch (error) {
-		return error.message;
+		return { error: error.message }
 	}
 }
 

@@ -10,7 +10,9 @@ export default function useProductsProvider() {
 	return {
 		produtos,
 		setProdutos,
-    atualizaCardapio,
+		atualizaProduto,
+		setAtualizaProduto,
+		atualizaCardapio,
 		setAtualizaCardapio,
 		restaurante,
 		setRestaurante,

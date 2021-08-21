@@ -34,6 +34,14 @@
 	margin: 30px auto;
 	display: flex;
 	justify-content: center;
+
+}
+
+.actionButtons a {
+	text-decoration:none;
+	font-size: 14px;
+	font-weight: 700;
+	padding: 11px 40px;
 }
 
 .content-modal-no-itens img {
@@ -54,4 +62,8 @@
 	font-weight: 700;
 	font-size: 14px;
 	margin: 20px 0;
+}
+
+.alert-confirmacao-pedido{
+	margin-top: 20px;
 }

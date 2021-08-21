@@ -16,7 +16,7 @@ import Delete from '../../Assets/delete-icon.png';
 
 function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
-	const [ erro, setErro ] = useState('');
+	const [erro, setErro] = useState('');
 	const { confirmCart, setConfirmCart, restaurante } = useProductsContext();
 	const [ count, setCount ] = useState(0);
 	const [ showDiv, setShowDiv ] = useState(true);
@@ -44,6 +44,7 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 		verificaProdutoQtd()
 	}, [produtoExiste])
 	
+
 	function handleClose() {
 		setOpenCarrinho(false)
 	}
@@ -53,15 +54,16 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 		setOpenRevisaoPedido(true)
 	}
 
+
 	function handleCart() {
 		const carrinhoAtual = [...confirmCart]
 
-		if(count === 0){
+		if (count === 0) {
 			return
 		}
 
-		if(confirmCart.length > 0){
-			if(restaurante.id !== confirmCart[0].idRestaurante){
+		if (confirmCart.length > 0) {
+			if (restaurante.id !== confirmCart[0].idRestaurante) {
 				return setErro('Não é possível adicionar produtos de restaurantes diferentes no mesmo pedido')
 			}
 		}
@@ -115,7 +117,7 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 			const newValue = count - 1;
 			return setCount(newValue); 
 		} 
-	}
+	
 
 	function handleAdd() {
 		const newValue = count + 1;
@@ -126,8 +128,8 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 
 		<div className='wrapperModalCarrinho'>
 			<div className='flex-column font-montserrat containerModalCarrinho'>
-				<div className='headerModalCarrinho flex-column' style={{backgroundImage: `url(${produto.imagem})`, backgroundPosition: 'center center'}}>
-					<img className='close-icon' src={closeIcon} alt="fechar"  onClick={() => handleClose()} />
+				<div className='headerModalCarrinho flex-column' style={{ backgroundImage: `url(${produto.imagem})`, backgroundPosition: 'center center' }}>
+					<img className='close-icon' src={closeIcon} alt="fechar" onClick={() => handleClose()} />
 					<img className='img-restaurante' src={User} alt='imagem restaurante' />
 				</div>
 
@@ -143,18 +145,20 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 							<div className='div-icon-carrinho'><img src={Time} alt="icon" /></div>
 							<p>{`Tempo de entrega: ${restaurante.tempo_entrega_minutos}  minutos`}</p>
 						</div>
+
 				</div>
 
 				<div className={showDiv ? "flex-column items-center" : "none"}>
 					<div className='flex-row restaurante-info-carrinho-3'>
 						<div className='restaurante-descricao'> {produto.descricao}
 						</div>
-						<div className='flex-row items-center content-center preco-div'>{`R$${(produto.preco/100).toFixed(2)}`} </div>
+						<div className='flex-row items-center content-center preco-div'>{`R$${(produto.preco / 100).toFixed(2)}`} </div>
 					</div>
 
 
 					<div className='flex-row items-center div-contador'>
 						<div className='flex-row items-center  div-contador-2'>
+
 							<div style={{backgroundColor: '#D13201', width: '25px', height: '25px'}}>
 								<img style={{width: '25px', height: '25px'}}src={produtoExiste && count < 2 ? Delete : Remove} alt="fechar" onClick={()=>handleRemove()} />
 							</div>
@@ -164,6 +168,7 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 							<div style={{backgroundColor: '#D13201', width: '25px', height: '25px'}}>
 								<img style={{width: '25px', height: '25px'}}src={Add} alt="fechar" onClick={()=>handleAdd()} />
 							</div>
+
 						</div>
 
 
@@ -181,10 +186,11 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 					</div>
 				</div>
 
-				<div className={showDivImg? "flex-column items-center content-center div-showImg" : "none"}>
+				<div className={showDivImg ? "flex-column items-center content-center div-showImg" : "none"}>
 					<img src={ShoppingCart} alt='icone carrinho' />
 					<p className='font-montserrat font-bold font-color-gray font-size-3'>{produtoExcluido ? 'Produto excluído!' : "Produto adicionado!"}</p>
 				</div>
+
 
 				
 				{confirmCart.length > 0 ?
@@ -197,7 +203,7 @@ function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 				
 
 				{erro &&
-				<Alert severity='error'>{erro}</Alert>
+					<Alert severity='error'>{erro}</Alert>
 				}
 			</div>
 		</div >
