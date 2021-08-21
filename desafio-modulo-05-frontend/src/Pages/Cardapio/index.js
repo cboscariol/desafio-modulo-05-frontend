@@ -17,15 +17,16 @@ import './style.css';
 
 function Cardapio() {
 	const { token } = useContext(AuthContext);
-
-	const restaurante_id = useParams();
-	const [erro, setErro] = useState('');
-	const [openCarrinho, setOpenCarrinho] = useState(false);
-	const [cardapio, setCardapio] = useState([]);
-	const [produtoEscolhido, setProdutoEscolhido] = useState();
-	const { restaurante, setRestaurante } = useProductsContext();
-	const [restauranteId, setRestauranteId] = useState(restaurante_id.id)
-	const [openRevisaoPedido, setOpenRevisaoPedido] = useState(false)
+  const restaurante_id  = useParams();
+	const [ erro, setErro ] = useState('');
+	const [ openCarrinho, setOpenCarrinho ] = useState(false);
+	const [ cardapio, setCardapio ] = useState([]);
+	const [ produtoEscolhido, setProdutoEscolhido ] = useState();
+	const { restaurante, setRestaurante, confirmCart } = useProductsContext();
+	const [ restauranteId, setRestauranteId ] = useState(restaurante_id.id)
+  const [openRevisaoPedido, setOpenRevisaoPedido] = useState(false)
+	const [ visibility, setVisibility ] = useState(false); 
+	
 
 	async function listarCardapio() {
 		const { lista, erros, errorGet } = await getCardapio(token, restauranteId);
@@ -55,6 +56,14 @@ function Cardapio() {
 		return setRestaurante(lista)
 	}
 
+	function handleVisibility(){
+		if(confirmCart.length > 0){
+			setVisibility(true)
+		} else{
+			setVisibility(false)
+		}
+	}
+
 	useEffect(() => {
 		listarCardapio();
 	}, []);
@@ -63,11 +72,9 @@ function Cardapio() {
 		listarRestaurante();
 	}, []);
 
-
-
-	function handleClick() {
-		setOpenCarrinho(true);
-	}
+	useEffect(() => {
+		handleVisibility()
+	}, [confirmCart])
 
 
 	function revisaoPedido() {
@@ -76,29 +83,25 @@ function Cardapio() {
 
 	return (
 		<div className='flex-column items-center container-products'>
-			{openCarrinho === true ?
-				<ModalCarrinho setOpenCarrinho={setOpenCarrinho} produto={produtoEscolhido} />
-				:
-				""
-			}
+
 			<Header idRestaurante={Number(restauranteId)} />
 			<img className='linhaLaranja' src={LinhaLaranja} alt="" />
 
 
 			<div className='flex-column items-center container-main'>
 
-				<div className='actBtn'>
-					<div>
-						<button
-							className='btn-orange-small font-montserrat font-color-white'
-							type='text'
-							onClick={revisaoPedido}
-						>
-							Revisar pedido
-						</button>
+					<div className={visibility ? "actBtn" : "hidden"}>
+						<div>
+							<button
+								className='btn-orange-small font-montserrat font-color-white'
+								type='text'
+								onClick={revisaoPedido}
+							>
+								Revisar pedido
+							</button>
 
+						</div>
 					</div>
-				</div>
 
 				<div className='flex-row items-center restaurant-info'>
 					<div className='flex-row items-center font-montserrat font-color-gray restaurant-info-2'>
@@ -151,6 +154,15 @@ function Cardapio() {
 					setOpenCarrinho={setOpenCarrinho}
 					setProdutoEscolhido={setProdutoEscolhido}
 					setOpenRevisaoPedido={setOpenRevisaoPedido} />
+				:
+				""
+			}
+
+			{openCarrinho === true ?
+				<ModalCarrinho 
+					setOpenRevisaoPedido={setOpenRevisaoPedido}
+					setOpenCarrinho={setOpenCarrinho} 
+					produto={produtoEscolhido}/>
 				:
 				""
 			}
