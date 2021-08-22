@@ -11,9 +11,17 @@
 	color: #525459;
 }
 
-.contentModal a{
+.buttonMaisItensPedido{
+	border: 0;
+	padding: 0;
+	background-color: transparent;
 	color: #525459;
-	margin-left: 120px;
+	transform: translate(150px);
+	border-bottom: solid 2px lightgray;
+	font-size: 13px;
+	font-weight: 600;
+	font-family:'Montserrat', sans-serif;
+
 }
 
 .finalCart {
@@ -66,4 +74,16 @@
 
 .alert-confirmacao-pedido{
 	margin-top: 20px;
+}
+
+.content-modal-sucess-pedido{
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20%;
+}
+
+.content-modal-sucess-pedido-img{
+	width: 115px;
+	height: 115px;
 }

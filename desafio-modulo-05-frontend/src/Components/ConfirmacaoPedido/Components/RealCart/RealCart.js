@@ -18,15 +18,10 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 	const [addressDetails, setAddressDetails] = useState()
 	const [erroSubmit, setErroSubmit] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
-	const history = useHistory()
 
 
 	const addAddress = () => {
 		setShowPage("address")
-	}
-
-	const redirect = () => {
-		history.push(`/cardapio/${restaurante.id}`)
 	}
 
 	const getEndereço = async () => {
@@ -51,6 +46,7 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 	}
 
 	const onSubmit = async () => {
+		console.log("ESTOU AQUI")
 		const subTotal = getSubTotal()
 
 		const cart = {
@@ -59,8 +55,7 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 			taxaEntrega: restaurante.taxa_entrega,
 			total: subTotal + restaurante.taxa_entrega,
 		}
-		console.log("cart aqui:")
-		console.log(cart)
+
 
 		const result = await finalizarPedido({ cart, token, id: restaurante.id });
 
@@ -99,7 +94,7 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 
 
 
-				<a href={`/cardapio/${restaurante.id}`}>Adicionar mais itens ao pedido</a>
+				<button className='buttonMaisItensPedido' onClick={closeRevisaoPedido}>Adicionar mais itens ao pedido</button>
 
 				<img src={lineModal} alt="" />
 
@@ -163,8 +158,9 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 
 			{/* --------------------------------------PEDIDO REALIZADO COM SUCESSO -------------------------------- */}
 
-			<div className='content-modal-sucess' style={{ display: showSuccess ? 'block' : 'none' }}>
-				<img src={successIcon} alt="endereço-adiconado-com-sucesso" />
+			<div className='content-modal-sucess-pedido' style={{ display: showSuccess ? 'flex' : 'none' }}>
+
+				<img className='content-modal-sucess-pedido-img' src={successIcon} alt="endereço-adiconado-com-sucesso" />
 				<p className='font-color-gray font-size-4 font-weight-600 text-align-center'>
 					Pedido Confirmado! <br></br>
 					Agora é só aguardar o seu pedido
@@ -176,7 +172,8 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 				</div>
 			</div>
 
-			{/* --------------------------------------SEM ITENS NO CARRINHO -------------------------------- */}
+
+
 
 
 

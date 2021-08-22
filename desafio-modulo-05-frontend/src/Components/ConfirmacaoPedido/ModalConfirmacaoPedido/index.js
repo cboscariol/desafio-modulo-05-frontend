@@ -30,7 +30,10 @@ function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEs
 			<div className='font-montserrat containerModal'>
 				<img src={closeIcon} className='closeModal' alt="fechar" onClick={handleClose} />
 				<div className='boxContainer'>
-					{showPage === "cart" ? <RealCart closeRevisaoPedido={handleClose} setShowPage={setShowPage} setOpenCarrinho={setOpenCarrinho} setProdutoEscolhido={setProdutoEscolhido} /> : <AddAddress setShowPage={setShowPage} />}
+					{showPage === "cart" ?
+						<RealCart closeRevisaoPedido={handleClose} setShowPage={setShowPage} setOpenCarrinho={setOpenCarrinho} setProdutoEscolhido={setProdutoEscolhido} />
+						:
+						<AddAddress setShowPage={setShowPage} />}
 				</div>
 			</div>
 		</div>
