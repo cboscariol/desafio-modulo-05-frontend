@@ -10,7 +10,7 @@ function CardCart(props) {
 			<div>
 				<h3>{props.nome}</h3>
 				<p>{props.quantidade}</p>
-				<p className='valueBox'>{props.precoTotal / 100}</p>
+				<p className='valueBox'> R$ {props.precoTotal / 100}</p>
 			</div>
 		</div>
 	)
