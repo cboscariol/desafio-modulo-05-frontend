@@ -17,7 +17,7 @@ import Delete from '../../Assets/delete-icon.png';
 export default function ModalCarrinho({ setOpenCarrinho, produto, setOpenRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
 	const [erro, setErro] = useState('');
-	const { confirmCart, setConfirmCart, restaurante } = useProductsContext();
+	const { confirmCart, setConfirmCart, removeConfirmCart, restaurante } = useProductsContext();
 	const [ count, setCount ] = useState(0);
 	const [ showDiv, setShowDiv ] = useState(true);
 	const [ showDivImg, setShowDivImg ] = useState(false);
