@@ -139,7 +139,7 @@ function Restaurantes() {
 				}
 
 				{restauranteFiltrado.length === 0 &&
-					<p>NÃO HÁ RESTAURANTES NESSA CATEGORIA</p>}
+					<p className='font-montserrat font-color-orange font-bold font-size-3'>Ops...sua busca não retornou nenhum restaurante!</p>}
 
 			</div>
 		</div>

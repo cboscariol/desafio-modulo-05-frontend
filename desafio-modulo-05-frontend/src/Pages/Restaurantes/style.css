@@ -67,6 +67,8 @@
 }
 
 .div-filter {
-    width: 90%;
-    gap: 0.8rem;
+    width: 100%;
+    gap: 0.9rem;
+    z-index: 2;
+    margin-left: -4rem;
 }
