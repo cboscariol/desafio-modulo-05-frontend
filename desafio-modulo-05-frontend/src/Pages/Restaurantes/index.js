@@ -4,7 +4,7 @@ import Header from '../../Components/Header';
 import CardRestaurante from '../../Components/CardRestaurante';
 import { AuthContext } from '../../Contexts/AuthContext';
 import LinhaLaranja from '../../Assets/Vector.svg';
-import { getRestaurantes } from '../../Services/functions';
+import { getRestaurantes, getCategorias } from '../../Services/functions';
 import './style.css';
 
 
@@ -14,12 +14,11 @@ function Restaurantes() {
 	const [ restaurantes, setRestaurantes ] = useState([]);
 	const [ restauranteFiltrado, setRestauranteFiltrado ] = useState([])
 	const [ filtro, setFiltro ] = useState("");
-	
-	
+	const [ filtroCategoria, setFiltroCategoria ] = useState();
+	const [ categoria, setCategoria ] = useState();
 	
 
 	useEffect(() => {
-
 		async function listarRestaurantes() {
 			const { lista, erros, errorGet } = await getRestaurantes(token);
 
@@ -37,6 +36,20 @@ function Restaurantes() {
 		listarRestaurantes();
 	}, [token]);
 
+	async function getCategoria() {
+		await fetch('https://icubus.herokuapp.com/categorias')
+			.then(async (res) => {
+				const data = await res.json()
+				if (res.status < 300) {
+					setCategoria(data)
+				}
+		})
+	} 
+
+	useEffect(() => {	
+		getCategoria()
+	}, [token])
+
 
 	useEffect(() => {
 		function filtrarRestaurante(){
@@ -45,7 +58,6 @@ function Restaurantes() {
 					return restaurante
 				} 
 			})
-			
 			setRestauranteFiltrado(resultadoFilter)
 		}
 
@@ -53,6 +65,21 @@ function Restaurantes() {
 	}, [filtro])
 
 
+	useEffect(() => {
+		function handleFiltro(){
+			const resultadoFilterCategoria = restaurantes.filter((restaurante) => {
+				if(restaurante.categoria_id === filtroCategoria){
+				   return restaurante
+				}
+			})
+			
+			setRestauranteFiltrado(resultadoFilterCategoria)
+		}
+		
+		handleFiltro()
+	}, [filtroCategoria])
+	
+	
 	return (
 		<div className='flex-column items-center container-products'>
 			<Header  />
@@ -73,7 +100,17 @@ function Restaurantes() {
 						</div>
 					</div>
 
-					{filtro ?
+					<div className='flex-row div-filter'>
+					{categoria && categoria.map((c) => {
+						return(
+							<button className='filter-btn' onClick={() => setFiltroCategoria(c.id)}>
+								{c.nome}
+							</button>
+						)
+					})}
+					</div>
+
+					{restauranteFiltrado && restauranteFiltrado.length > 0 ?
 						<div className='grid' >
 								{restauranteFiltrado.map((r) => {
 									return (
