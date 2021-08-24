@@ -6,7 +6,7 @@ export default function useProductsProvider() {
 	const [atualizaCardapio, setAtualizaCardapio] = useState(false);
 	const [atualizaProduto, setAtualizaProduto] = useState(false);
 	const [restaurante, setRestaurante] = useState([])
-	const [confirmCart, setConfirmCart, removeConfirmCart ] = useLocalStorage('carrinho', [])
+	const [confirmCart, setConfirmCart, removeConfirmCart] = useLocalStorage('carrinho', [])
 
 	return {
 		produtos,
@@ -17,7 +17,8 @@ export default function useProductsProvider() {
 		setAtualizaCardapio,
 		restaurante,
 		setRestaurante,
-		confirmCart,
-		setConfirmCart
+		confirmCart: confirmCart || [],
+		setConfirmCart,
+		removeConfirmCart,
 	};
 }

@@ -13,11 +13,12 @@ import { finalizarPedido, getEndereco } from '../../../../Services/functions'
 
 function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevisaoPedido }) {
 	const { token } = useContext(AuthContext);
-	const { restaurante, confirmCart } = useContext(ProductsContext);
+	const { restaurante, confirmCart, setConfirmCart, removeConfirmCart } = useContext(ProductsContext);
 	const [showAddress, setShowAddress] = useState(false)
 	const [addressDetails, setAddressDetails] = useState()
 	const [erroSubmit, setErroSubmit] = useState(false)
 	const [showSuccess, setShowSuccess] = useState(false)
+	const [render, setRender] = useState(true)
 
 
 	const addAddress = () => {
@@ -48,6 +49,7 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 	const onSubmit = async () => {
 		console.log("ESTOU AQUI")
 		const subTotal = getSubTotal()
+		console.log(confirmCart)
 
 		const cart = {
 			produtos: confirmCart,
@@ -63,6 +65,7 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 			setErroSubmit(result.error)
 		} else {
 			setShowSuccess(true)
+			removeConfirmCart()
 		}
 	}
 
@@ -139,6 +142,8 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 
 				}
 
+
+
 				{confirmCart.length === 0 ?
 					<div className='content-modal-no-itens'>
 						<img src={semItensCarrinho} alt="endereço-adiconado-com-sucesso" />
@@ -146,12 +151,6 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 					:
 					renderOrderInfos()
 				}
-
-
-
-
-
-
 
 			</div>
 
