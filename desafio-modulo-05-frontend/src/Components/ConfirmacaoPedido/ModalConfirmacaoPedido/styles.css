@@ -1,17 +1,20 @@
 .wrapperModal{
-	padding: 50px 0;
 	background-color: rgba(32, 32, 32, 0.60);
 	min-height: 100vh;
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .containerModal{
 	width: 625px;
-	min-height: 820px;
+	min-height: 80vh;
+	overflow: auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
