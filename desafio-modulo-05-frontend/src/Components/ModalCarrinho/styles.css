@@ -1,12 +1,14 @@
 .wrapperModalCarrinho {
-	padding: 120px 0;
 	background-color: rgba(32, 32, 32, 0.60);
-	position: absolute;
+	min-height: 100vh;
+	position: fixed;
 	top: 0;
 	left: 0;
-	width: 100vw;
-	min-height: 100vh;
+	width: 100%;
 	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .containerModalCarrinho {
@@ -56,7 +58,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-    background: rgba(88, 88, 88, 1); 
+    background: rgba(88, 88, 88, 1);
     width: 25px;
     height: 25px;
 }
@@ -76,13 +78,13 @@
 .restaurant-info-carrinho {
     width: 32rem;
     justify-content: space-between;
-	
+
 }
 
 .restaurant-info-carrinho-2 {
     gap: 7px;
     font-size: 14px;
-    font-weight: 400;  
+    font-weight: 400;
 }
 
 .restaurante-info-carrinho-3 {

@@ -1,5 +1,5 @@
 .headerProducts {
-    background-image: url('../../Assets/Rectangle\ 129.png');  
+    background-image: url('../../Assets/Rectangle\ 129.png');
     background-repeat: no-repeat;
     background-size: auto;
 		background-color: lightgrey;
@@ -24,6 +24,7 @@
 		height: 171px;
     position: absolute;
     z-index: 1;
+		object-fit: cover;
 }
 
 .btn-logout {
