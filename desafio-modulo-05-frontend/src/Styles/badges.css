@@ -12,6 +12,7 @@
     cursor: pointer;
 }
 
+
 .btn-orange-small {
     background-color: #D13201;
     display: flex;
@@ -37,4 +38,46 @@
     background-color: transparent;
     font-size: 0.7rem;
     cursor: pointer;
+}
+
+.filter-btn {
+    border: none;
+    box-shadow: 0px 4px 6px rgba(50,50,50,0.24);
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 8.5rem;
+    height: 2rem;
+    background-color: transparent;
+    font-size: 0.7rem;
+    color: #D13201;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background-color: #d13201d5;
+    color: white;
+}
+
+.input-gray-big {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem 2.5rem;
+    width: 18rem;
+    height: 1rem;
+    margin-right: -5rem;
+    margin-bottom: 0.8rem;
+    border-style: none;
+    border-radius: 4rem;
+    background-color: #F5F5F5;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+    color: rgba(82, 84, 89, 0,6);
+    position: relative;
+    outline: none;
+    z-index: 2;
 }

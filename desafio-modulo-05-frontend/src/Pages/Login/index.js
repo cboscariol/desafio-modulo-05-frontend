@@ -2,6 +2,7 @@ import React from 'react';
 import useStyles from './styles';
 import './style.css'
 import { useState, useContext } from 'react';
+import logoLogin from '../../Assets/logo-login.png'
 import InputSenha from '../../Components/InputSenha/inputSenha';
 import {
 	Card,
@@ -33,7 +34,7 @@ export default function Login() {
 
 
 
-		fetch('https://icubus.herokuapp.com/login', {
+		fetch('https://icubus-clientes.herokuapp.com/login', {
 			method: "POST",
 			body: JSON.stringify(data),
 			headers: {
@@ -47,7 +48,7 @@ export default function Login() {
 				setError(data)
 			} else {
 				setToken(data.token)
-				history.push('/produtos')
+				history.push('/restaurantes')
 			}
 		});
 	}
@@ -57,6 +58,10 @@ export default function Login() {
 		setShowRegisterSuccess(false)
 	}
 
+	const handleCloseErrorAlert = () => {
+		setError('')
+	}
+
 
 	return (
 		<div className={classes.container}>
@@ -64,16 +69,20 @@ export default function Login() {
 			<Card className={classes.cardLogin}>
 				<CardContent >
 					{showRegisterSuccess && (
-						<Alert severity="success" onClose={handleCloseAlert}>
+						<Alert severity="success" variant="filled" onClose={handleCloseAlert}>
 							Cadastro efetuado com sucesso
 						</Alert>
 					)}
-					<h1 className='loginTitle font-baloo'>Login</h1>
 					{Boolean(error) && (
-						<Alert severity="error">
+						<Alert severity="error" variant="filled" onClose={handleCloseErrorAlert}>
 							{error}
 						</Alert>
 					)}
+					<div className='header-login'>
+						<h1 className='loginTitle font-baloo'>Login</h1>
+						<img src={logoLogin} alt="logo-barril" />
+					</div>
+
 					<form className={classes.formsLogin} onSubmit={handleSubmit(onSubmit)} noValidate autoComplete="off">
 						<div className={classes.formsLogin}>
 							<h2 className='placeholderLogin font-montserrat'>Email</h2>
@@ -89,8 +98,7 @@ export default function Login() {
 						<div className={classes.formsLogin}>
 							<h2 className='placeholderLogin font-montserrat'>Senha</h2>
 							<InputSenha
-								error={Boolean(errors.senha)}
-								helperText={errors.senha ? "Campo Obrigatório" : false}
+								error={errors.senha ? "Campo Obrigatório" : false}
 								register={() => register('senha', { required: true })}
 								id="inputSenhaLogin" />
 						</div>

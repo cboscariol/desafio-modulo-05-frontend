@@ -1,3 +1,73 @@
+export async function getRestaurantes(token) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/restaurantes', {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
+		});
+
+		const lista = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erros: lista }
+		}
+
+		return { lista }
+	}
+	catch (error) {
+		return { errorGet: error.message };
+	}
+};
+
+export async function getRestaurante(token, id) {
+	try {
+		const resposta = await fetch(`https://icubus-clientes.herokuapp.com/restaurantes/${id}`, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
+		});
+
+		const lista = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erros: lista }
+		}
+
+		return { lista }
+	}
+	catch (error) {
+		return { errorGet: error.message };
+	}
+};
+
+export async function getCardapio(token, id) {
+	console.log(Number(id.id), "id da funcao cardapio")
+
+
+	try {
+		const resposta = await fetch(`https://icubus-clientes.herokuapp.com/restaurantes/${id}/produtos/ativos`, {
+			headers: {
+				'Authorization': `Bearer ${token}`,
+				'Content-Type': 'application/json'
+			}
+		});
+
+		const lista = await resposta.json();
+		console.log(resposta, "funcao cardapio resposta")
+		if (resposta.status >= 400) {
+			return { erros: lista }
+		}
+		console.log(lista, "funcao cardapio")
+		return { lista };
+
+	}
+	catch (error) {
+		return { errorGet: error.message };
+	}
+};
+
 export async function getProducts(token) {
 	try {
 		const resposta = await fetch('https://icubus.herokuapp.com/produtos', {
@@ -214,6 +284,75 @@ export async function putEditProfile(token, perfilEditado) {
 		return dados
 	} catch (error) {
 		return { error: error.message }
+	}
+}
+
+export async function finalizarPedido({ cart, token, id }) {
+	try {
+		const resposta = await fetch(`https://icubus-clientes.herokuapp.com/restaurantes/${id}/finalizar-pedido`, {
+			method: 'POST',
+			body: JSON.stringify(cart),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { error: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return { error: error.message }
+	}
+}
+
+export async function adicionaEndereco({ data, token }) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/clientes/enderecos', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erro: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return error.message;
+	}
+}
+
+export async function getEndereco(token) {
+	try {
+		const resposta = await fetch('https://icubus-clientes.herokuapp.com/clientes/enderecos', {
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		});
+
+		const dados = await resposta.json();
+
+		if (resposta.status >= 400) {
+			return { erro: dados }
+		}
+
+		return dados
+	}
+	catch (error) {
+		return error.message;
 	}
 }
 

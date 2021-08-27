@@ -1,0 +1,140 @@
+.wrapperModal{
+	background-color: rgba(32, 32, 32, 0.60);
+	min-height: 100vh;
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.containerModal{
+	width: 625px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	box-shadow: 0px 4px 16px rgba(50, 50, 50, 0.4);
+	border-radius: 16px;
+	background-color: white;
+	padding-right: 5px;
+}
+
+.containerModal h1 {
+	font-family: 'Baloo 2', sans-serif;
+	color: #D13201;
+	font-size: 32px;
+}
+
+.formsModal{
+	gap: 20px;
+	display: flex;
+	margin-bottom: 40px;
+}
+
+
+.uploadDivModal{
+	height: 250px;
+	width: 250px;
+	margin-left: 20px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 32px;
+}
+
+
+.imageModal{
+	border-radius: 16px;
+	width: 250px;
+	height: 250px;
+	object-fit: cover;
+}
+
+
+.labelModal{
+	color: white;;
+	font-weight: 600;
+	font-size: 14px;
+	text-align: center;
+	position: absolute;
+	bottom: 20px;
+}
+
+.loadingContainer {
+	height: 1120px;
+	width: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.headerModal{
+	display: flex;
+	justify-content: flex-start;
+	height: 50px;
+	margin-top: 35px;
+	align-items: center;
+	gap: 15px;
+}
+
+.closeModal{
+	position: absolute;
+	top: 20px;
+	right: 20px
+}
+
+.inputModal{
+	min-width: 408px;
+	gap: 20px;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 600;
+	color: #393C40;
+}
+
+.actionButtons{
+	margin: 30px auto;
+	display: flex;
+	justify-content: center;
+}
+
+.MuiAlert-root {
+	font-family: 'Montserrat', sans-serif !important;
+	font-size: 13px !important;
+	border-radius: 16px !important;
+	padding: 6px 10px !important;
+	margin-bottom: 10px;
+}
+
+.boxContainer {
+	width: 478px;
+	margin: 0 auto;
+}
+
+.finalCart {
+	display: flex;
+	flex-direction: column;
+}
+
+.finalCart spam {
+	font-weight: 600;
+}
+
+.finalCartStyle {
+	display: flex;
+	justify-content: space-between;
+}
+
+.contentModal{
+	color: #525459;
+}
+
+.contentModal a{
+	color: #525459;
+	margin-left: 120px;
+}
+
+
+
+

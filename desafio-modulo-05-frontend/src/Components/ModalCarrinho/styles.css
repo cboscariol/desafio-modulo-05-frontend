@@ -1,0 +1,124 @@
+.wrapperModalCarrinho {
+	background-color: rgba(32, 32, 32, 0.60);
+	min-height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 1000;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.containerModalCarrinho {
+	width: 625px;
+	height: min-content;
+	align-items: center;
+	margin: 0 auto;
+	box-shadow: 0px 4px 16px rgba(50, 50, 50, 0.4);
+	border-radius: 16px;
+	background-color: white;
+}
+
+.headerModalCarrinho {
+	background-repeat: no-repeat;
+    background-size: auto;
+	background-color: lightgrey;
+    border-radius: 20px 20px 0px 0px;
+    width: 100%;
+    height: 11rem;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+
+
+.MuiAlert-root {
+	font-family: 'Montserrat', sans-serif !important;
+	font-size: 13px !important;
+	border-radius: 16px !important;
+	padding: 6px 10px !important;
+	/* margin-bottom: 10px; */
+}
+
+.title {
+	color: rgba(82, 84, 89, 1);
+	font-weight: 600;
+	width: 90%;
+	margin-left: 2.5rem;
+	justify-content: flex-start;
+}
+.close-icon {
+	margin-right: 3rem;
+	margin-top: 3rem;
+}
+
+.div-icon-carrinho {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(88, 88, 88, 1);
+    width: 25px;
+    height: 25px;
+}
+
+.img-restaurante {
+	border-radius: 50%;
+    border: 6px solid white;
+    margin-left: 5rem;
+    margin-right: 2rem;
+    margin-top: 7rem;
+	width: 121px;
+	height: 121px;
+    position: absolute;
+    z-index: 1;
+}
+
+.restaurant-info-carrinho {
+    width: 32rem;
+    justify-content: space-between;
+
+}
+
+.restaurant-info-carrinho-2 {
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.restaurante-info-carrinho-3 {
+	width: 30rem;
+	justify-content: space-between;
+	margin-top: 2rem;
+}
+
+.restaurante-descricao {
+	width: 15rem;
+}
+
+.preco-div {
+	background: linear-gradient(0deg, rgba(13, 138, 79, 0.1), rgba(13, 138, 79, 0.1)), #FFFFFF;
+	border-radius: 4px;
+	width: 10rem;
+	height: 3rem;
+	color: #006335;
+	font-weight: bold;
+}
+
+.div-contador {
+	width: 20rem;
+	margin-top: 2.3rem;
+	margin-bottom: 1rem;
+	justify-content: space-between;
+}
+
+.div-contador-2 {
+	width: min-content;
+	gap: 1rem;
+}
+
+.div-showImg {
+	width: 30rem;
+	height: 15rem;
+}

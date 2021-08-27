@@ -1,11 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
-import bglogin from '../../Assets/bg-login.png'
+import bglogin from '../../Assets/bg-login-consumidor.png'
 
 
 const useStyles = makeStyles({
 	container: {
 		backgroundImage: `url(${bglogin})`,
 		backgroundSize: "cover",
+		backgroundRepeat: "no-repeat",
 		backgroundPosition: "center",
 		height: "100vh",
 		display: "flex",
@@ -14,7 +15,7 @@ const useStyles = makeStyles({
 	},
 	cardLogin: {
 		minWidth: "25%",
-		transform: "translateX(-40%)",
+		transform: "translateX(-60%)",
 		display: "flex",
 		flexDirection: "column",
 		alignItems: "center",
