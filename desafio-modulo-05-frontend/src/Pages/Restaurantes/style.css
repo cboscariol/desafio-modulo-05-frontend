@@ -65,3 +65,10 @@
     margin-left: -158.45px;
     margin-top: -84.47px;
 }
+
+.div-filter {
+    width: 100%;
+    gap: 0.9rem;
+    z-index: 2;
+    margin-left: -4rem;
+}
