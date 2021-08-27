@@ -4,7 +4,7 @@ import closeIcon from '../Assets/close-icon.svg'
 import './styles.css';
 import AddAddress from '../Components/AddAddress/AddAddress'
 import RealCart from '../Components/RealCart/RealCart'
-
+import RSC from "react-scrollbars-custom";
 
 
 
@@ -28,13 +28,15 @@ function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEs
 
 		<div className='wrapperModal'>
 			<div className='font-montserrat containerModal'>
-				<img src={closeIcon} className='closeModal' alt="fechar" onClick={handleClose} />
-				<div className='boxContainer'>
-					{showPage === "cart" ?
-						<RealCart closeRevisaoPedido={handleClose} setShowPage={setShowPage} setOpenCarrinho={setOpenCarrinho} setProdutoEscolhido={setProdutoEscolhido} />
-						:
-						<AddAddress setShowPage={setShowPage} />}
-				</div>
+				<RSC id="RSC-Example" style={{ width: "100%", height: "90vh" }}>
+					<img src={closeIcon} className='closeModal' alt="fechar" onClick={handleClose} />
+					<div className='boxContainer'>
+						{showPage === "cart" ?
+							<RealCart closeRevisaoPedido={handleClose} setShowPage={setShowPage} setOpenCarrinho={setOpenCarrinho} setProdutoEscolhido={setProdutoEscolhido} />
+							:
+							<AddAddress setShowPage={setShowPage} />}
+					</div>
+				</RSC>
 			</div>
 		</div>
 
