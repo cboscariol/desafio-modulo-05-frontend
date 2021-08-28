@@ -42,7 +42,6 @@ function Restaurantes() {
 			.then(async (res) => {
 				const data = await res.json()
 				if (res.status < 300) {
-					console.log("CATEGORIAS", data)
 					setCategoria([{
 						id: 0,
 						nome: 'Todos',
@@ -81,7 +80,6 @@ function Restaurantes() {
 					return restaurante
 				}
 			})
-			console.log("RESULTADO AQUI", resultadoFilterCategoria)
 
 			setRestauranteFiltrado(resultadoFilterCategoria)
 		}

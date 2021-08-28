@@ -47,9 +47,8 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 	}
 
 	const onSubmit = async () => {
-		console.log("ESTOU AQUI")
+	
 		const subTotal = getSubTotal()
-		console.log(confirmCart)
 
 		const cart = {
 			produtos: confirmCart,
@@ -82,8 +81,6 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 		return (
 			<>
 				<p className='font-bold font-size-2'>Tempo de Entrega: <span className='font-size-1 '>{restaurante.tempo_entrega_minutos} min</span></p>
-
-
 
 				{confirmCart.map((produto) => (
 					<CardCart
@@ -170,13 +167,6 @@ function RealCart({ setShowPage, setProdutoEscolhido, setOpenCarrinho, closeRevi
 					<a href={`/cardapio/${restaurante.id}`} className='btn-orange-small font-montserrat font-color-white' >Voltar para o cardápio</a>
 				</div>
 			</div>
-
-
-
-
-
-
-
 		</div>
 	)
 }

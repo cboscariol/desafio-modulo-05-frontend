@@ -17,10 +17,6 @@ function Header({ idRestaurante }) {
 	const [ imagemPerfil, setImagemPerfil ] = useState()
 	const [ restaurante, setRestaurante ] = useState();
 	
-	// function handleOpenModal() {
-	// 	setOpenModal(true)
-	// }
-
 	function logout() {
 		localStorage.clear();
 		history.push('/');
