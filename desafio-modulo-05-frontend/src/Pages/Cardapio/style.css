@@ -87,7 +87,7 @@
 }
 
 .restaurant-info {
-    width: 50rem;
+    min-width: 50rem;
     justify-content: space-between;
 }
 
