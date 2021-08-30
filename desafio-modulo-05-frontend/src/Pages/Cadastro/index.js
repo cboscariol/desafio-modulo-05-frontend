@@ -22,7 +22,6 @@ function Cadastro() {
 
 	async function salvarCadastro(data) {
 		setError(false);
-		console.log(data)
 
 		if (data.senha !== data.senhaRepetida) {
 			return

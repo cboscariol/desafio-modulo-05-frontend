@@ -35,7 +35,7 @@ export default function CardCardapio({ setOpenCarrinho, setProdutoEscolhido, id,
       descricao: descricao,
 			id: id
 		}
-		console.log(produto, 'produto')
+	
 		setProdutoEscolhido(produto);
 		setOpenCarrinho(true);
 	}
