@@ -32,3 +32,7 @@ Uma aba será aberta localmente no seu browser (http://localhost:3000) para roda
 ## Prévia do fluxo aplicação cliente - restaurante:
 
 ## Prévia do fluxo aplicação cliente - consumidor:
+
+https://user-images.githubusercontent.com/74324194/131341663-34844137-afd3-4fd4-b937-916cc89113b5.mov
+
+
