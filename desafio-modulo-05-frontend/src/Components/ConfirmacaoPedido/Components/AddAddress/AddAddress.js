@@ -21,7 +21,7 @@ function AddAddress({ setShowPage }) {
 
 	const onSubmit = async () => {
 		const values = getValues()
-		console.log(values)
+		
 		const data =
 		{
 			cep: values.cep,

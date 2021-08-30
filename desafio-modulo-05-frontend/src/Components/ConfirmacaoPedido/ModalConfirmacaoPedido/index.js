@@ -7,8 +7,6 @@ import RealCart from '../Components/RealCart/RealCart'
 import RSC from "react-scrollbars-custom";
 
 
-
-
 function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEscolhido }) {
 	const { token } = useContext(AuthContext);
 	const [showPage, setShowPage] = useState("cart")
@@ -16,13 +14,6 @@ function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEs
 	const handleClose = () => {
 		setOpenRevisaoPedido(false)
 	}
-
-	useEffect(() => {
-		console.log(showPage)
-	}, [])
-
-
-
 
 	return (
 
@@ -39,14 +30,6 @@ function ConfirmacaoPedido({ setOpenRevisaoPedido, setOpenCarrinho, setProdutoEs
 				</RSC>
 			</div>
 		</div>
-
-
-
-
-
-
-
-
 	)
 }
 
